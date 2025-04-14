@@ -1,0 +1,311 @@
+/* style.css */
+:root {
+    --bg-color: #3f122f;
+    --text-color: hsl(323, 8%, 59%);
+    --light-accent: #e8d7d3;
+    --highlight: #a87b7b;
+    --t30: 4.93vmin;
+    --t20: 3.28vmin;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* Navigation */
+.navbar {
+    background: var(--bg-color);
+    padding: 1.5rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    height: 60px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.nav-links a {
+    color: var(--light-accent);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+}
+
+.nav-links a:hover {
+    color: var(--highlight);
+    transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero {
+    height: 85vh;
+    background: linear-gradient(rgba(63, 18, 47, 0.7), rgba(63, 18, 47, 0.5)),
+                url('../image/background/bg0000.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--light-accent);
+    margin-bottom: 3rem;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Categories Grid - Adjusted Heights */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 600px 400px; /* Modified row heights */
+    grid-template-areas: 
+        "ring ring ring necklace necklace "
+        "bracelet earring stone stone .";
+    gap: 1.8rem;
+    width: 95%;
+    margin: 3rem 0;
+    padding: 0 2rem;
+}
+
+.category-card:nth-child(1) { grid-area: necklace; } 
+.category-card:nth-child(2) { grid-area: ring; }    
+.category-card:nth-child(3) { grid-area: bracelet; }
+.category-card:nth-child(4) { grid-area: earring; }
+.category-card:nth-child(5) { grid-area: stone; }
+
+.category-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.category-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+.category-card:hover .category-image {
+    transform: scale(1.05);
+}
+
+.category-card h3 {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--light-accent);
+    background: rgba(63, 18, 47, 0.28);
+    padding: 1.2rem 2.5rem;
+    border-radius: 10px;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    backdrop-filter: blur(3px);
+}
+
+/* Products Section */
+.products-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 2.5rem;
+    padding: 0 2rem 2rem;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+.product-card {
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.product-image {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    border-bottom: 3px solid var(--light-accent);
+}
+
+.product-info {
+    padding: 1.8rem;
+    text-align: center;
+}
+
+.price {
+    color: var(--highlight);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 1rem 0;
+}
+
+.old-price {
+    color: var(--text-color);
+    opacity: 0.7;
+    text-decoration: line-through;
+    margin-left: 1rem;
+}
+
+/* Scrollbar Styling */
+.products-grid::-webkit-scrollbar {
+    height: 6px;
+}
+
+.products-grid::-webkit-scrollbar-thumb {
+    background-color: var(--highlight);
+    border-radius: 3px;
+}
+
+.products-grid::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Footer */
+footer {
+    background: var(--bg-color);
+    color: var(--light-accent);
+    margin-top: 6rem;
+    padding: 4rem 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    padding: 0 2rem;
+}
+
+.footer-section h2 {
+    font-size: 1.5rem;
+    border-bottom: 2px solid var(--highlight);
+    padding-bottom: 1.2rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/***************************** Responsive Design ********************************************/
+@media (max-width: 1200px) {
+    .categories-grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 500px 350px; /* Adjusted for tablet */
+        grid-template-areas: 
+            "necklace necklace ring ring"
+            "bracelet earring stone stone";
+    }
+}
+
+@media (max-width: 992px) {
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto; /* Flexible rows on smaller screens */
+        grid-template-areas: 
+            "necklace ring"
+            "bracelet earring"
+            "stone stone";
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .categories-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: 
+            "necklace"
+            "ring"
+            "bracelet"
+            "earring"
+            "stone";
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .hero {
+        height: 50vh;
+    }
+    
+    .category-card h3 {
+        font-size: 1.3rem;
+        bottom: 25px;
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .category-card h3 {
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+    }
+    
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+}
+/***************************************************************************************/
