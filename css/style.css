@@ -15,7 +15,8 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    color: #555;;
+    font-family: 'Great Vibes';
     line-height: 1.6;
     color: var(--text-color);
     overflow-x: hidden;
@@ -239,73 +240,343 @@ footer {
     border-top: 1px solid rgba(255,255,255,0.1);
 }
 
-/***************************** Responsive Design ********************************************/
-@media (max-width: 1200px) {
-    .categories-grid {
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: 500px 350px; /* Adjusted for tablet */
-        grid-template-areas: 
-            "necklace necklace ring ring"
-            "bracelet earring stone stone";
-    }
+/*****************************  about us  ****************************************************<style>
+/* ===== ABOUT PAGE STYLES ===== */
+.about-page-wrapper {
+    position: relative;
+    padding: 100px 0;
+    min-height: 100vh;
+    background: #f9f6f7;
+    overflow: hidden;
 }
 
-@media (max-width: 992px) {
+.animated-container {
+    position: relative;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 100px 80px;
+    border-radius: 40px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.animated-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #3f122f, hsl(323, 8%, 59%), rgb(229, 219, 239));
+    background-size: 400% 400%;
+    animation: gradientAnimation 23s ease infinite;
+    z-index: -1;
+    opacity: 0.9;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.animated-container h1 {
+    font-size: 4.5rem;
+    color: var(--light-accent);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    animation: textGlow 3s ease-in-out infinite;
+}
+
+.animated-container h4 {
+    font-size: 2rem;
+    color: var(--light-accent);
+    text-align: center;
+    margin-bottom: 4rem;
+    letter-spacing: 2px;
+    animation: fadeIn 1.5s ease-out;
+}
+
+@keyframes textGlow {
+    0%, 100% { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+    50% { text-shadow: 0 0 20px rgba(255,255,255,0.6); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container {
+    display: flex;
+    gap: 60px;
+    max-width: 1600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.column {
+    flex: 1;
+    padding: 50px;
+    border-radius: 25px; 
+    backdrop-filter: blur(8px);
+    transition: all 0.4s ease;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.column:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+.column h2 {
+    font-size: 2.5rem;
+    color: var(--bg-color);
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.column h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: var(--highlight);
+}
+
+.column img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: 10px;
+    transition: transform 0.4s ease;
+}
+
+.column:hover img {
+    transform: scale(1.03);
+}
+
+.column p {
+    color: #555;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.team {
+    padding: 120px 0;
+    margin-top: 100px;
+    position: relative;
+}
+
+.team h1 {
+    font-size: 4rem;
+    color: var(--light-accent);
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.team h4 {
+    font-size: 1.8rem;
+    color: var(--light-accent);
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.team-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 100px;
+}
+
+.member {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 60px;
+    border-radius: 30px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    transition: all 0.6s ease;
+}
+
+.member:hover {
+    transform: translateY(-15px);
+}
+
+.pict {
+    width: 280px;
+    height: 280px;
+    margin: 0 auto 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid var(--light-accent);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    transition: all 0.6s ease;
+}
+
+.member:hover .pict {
+    transform: scale(1.05);
+    border-color: var(--highlight);
+}
+
+.pict img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.6s ease;
+}
+
+.member:hover .pict img {
+    transform: scale(1.1);
+}
+
+.namet h2 {
+    font-size: 2.5rem;
+    color: var(--bg-color);
+    margin-bottom: 15px;
+}
+
+.namet p {
+    font-size: 1.4rem;
+    color: var(--highlight);
+    margin-bottom: 30px;
+}
+
+.cta {
+    padding: 150px 0;
+    background: linear-gradient(45deg, #3f122f, #5d274f);
+    text-align: center;
+    position: relative;
+    margin-top: 100px;
+}
+
+.cta h2 {
+    font-size: 4rem;
+    color: var(--light-accent);
+    margin-bottom: 50px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 25px 70px;
+    background: var(--light-accent);
+    color: var(--bg-color);
+    border-radius: 50px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    transition: all 0.4s ease;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.cta-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: #fff;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+}
+
+/***************************** Responsive Design ********************************************/
+
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
     .categories-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: auto; /* Flexible rows on smaller screens */
-        grid-template-areas: 
-            "necklace ring"
-            "bracelet earring"
-            "stone stone";
-        gap: 1.5rem;
-        padding: 0 1rem;
+        .categories-grid {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-areas: 
+                "ring ring necklace"
+                "bracelet earring stone";
+        }
+        
+       
+        .animated-container { padding: 60px 40px; }
+        .container { gap: 40px; }
+        
+        
+        .team-container { grid-template-columns: 1fr; }
     }
     
-    .hero-content h1 {
-        font-size: 2.8rem;
+
+    /* --- About Page Journey Section --- */
+    .animated-container {
+        padding: 60px 40px;
+    }
+    
+    .container {
+        gap: 30px;
+    }
+    
+    .column {
+        padding: 35px;
+    }
+    
+    .column img {
+        height: 250px;
+        margin: 25px 0;
+    }
+
+    /* --- Team Section --- */
+    .team-container {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        padding: 0 60px;
+    }
+    
+    .pict {
+        width: 220px;
+        height: 220px;
     }
 }
-
 @media (max-width: 768px) {
+    /* Categories Grid */
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 
+            "ring necklace"
+            "bracelet earring"
+            "stone .";
+    }
+    
+    /* Our Journey Section */
+    .container { flex-direction: column; }
+    .column { margin-bottom: 30px; }
+    
+    /* Team Section */
+    .team-container { padding: 0 30px; }
+}
+
+/* Phones (under 600px) */
+@media (max-width: 600px) {
+    /* Categories Grid */
     .categories-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: auto;
         grid-template-areas: 
-            "necklace"
             "ring"
+            "necklace"
             "bracelet"
             "earring"
             "stone";
     }
     
-    .nav-links {
-        display: none;
-    }
+    /* Our Journey Section */
+    .animated-container { padding: 30px 20px; }
+    .column { padding: 20px; }
+    .column img { height: 200px; }
     
-    .hero {
-        height: 50vh;
-    }
-    
-    .category-card h3 {
-        font-size: 1.3rem;
-        bottom: 25px;
-        padding: 0.8rem 1.5rem;
-    }
+    /* Team Section */
+    .team-container { padding: 0 15px; }
+    .pict { width: 180px; height: 180px; }
 }
-
-@media (max-width: 480px) {
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-    
-    .category-card h3 {
-        font-size: 1.1rem;
-        letter-spacing: 1px;
-    }
-    
-    .footer-container {
-        grid-template-columns: 1fr;
-    }
-}
-/***************************************************************************************/
