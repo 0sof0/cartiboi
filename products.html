@@ -20,3 +20,96 @@
             </div>
         </div>
     </nav>
+
+    <!-- Products Main Content -->
+    <main class="products-page">
+        <section class="products-hero">
+            <h1>Our Collection</h1>
+            <p>Explore Our Premium Gemstone Jewelry</p>
+        </section>
+
+        <div class="products-wrapper">
+            <!-- Filters Sidebar -->
+            <aside class="filters-sidebar">
+                <div class="filter-group">
+                    <h3>Accessory Type</h3>
+                    <div class="filter-options accessory-filter">
+                        <label><input type="checkbox" name="accessory" value="All" checked> All</label>
+                        <label><input type="checkbox" name="accessory" value="Ring"> Rings</label>
+                        <label><input type="checkbox" name="accessory" value="Earring"> Earrings</label>
+                        <label><input type="checkbox" name="accessory" value="Necklace"> Necklaces</label>
+                        <label><input type="checkbox" name="accessory" value="Bracelet"> Bracelets</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Stone Type</h3>
+                    <div class="filter-options stone-filter">
+                        <label><input type="checkbox" name="stone" value="All" checked> All</label>
+                        <label><input type="checkbox" name="stone" value="Diamond"> Diamond</label>
+                        <label><input type="checkbox" name="stone" value="Emerald"> Emerald</label>
+                        <label><input type="checkbox" name="stone" value="Ruby"> Ruby</label>
+                        <label><input type="checkbox" name="stone" value="Sapphire"> Sapphire</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Price Range ($)</h3>
+                    <div class="price-controls">
+                        <input type="number" id="minPrice" placeholder="Min" min="0">
+                        <input type="number" id="maxPrice" placeholder="Max" min="0">
+                    </div>
+                </div>
+
+                <button class="clear-filters">Clear All Filters</button>
+            </aside>
+
+            <!-- Products Grid -->
+            <div class="products-container">
+                <!-- Sample Products -->
+                <div class="product-card" data-category="Ring" data-stone="Diamond" data-price="4500">
+                    <img src="image/rings/diamond-ring.jpg" alt="Diamond Ring">
+                    <div class="product-info">
+                        <h3>Royal Diamond Ring</h3>
+                        <p class="price">$4,500</p>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="Necklace" data-stone="Emerald" data-price="3200">
+                    <img src="image/necklaces/emerald-necklace.jpg" alt="Emerald Necklace">
+                    <div class="product-info">
+                        <h3>Emerald Elegance</h3>
+                        <p class="price">$3,200</p>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="Earring" data-stone="Ruby" data-price="2800">
+                    <img src="image/earrings/ruby-earrings.jpg" alt="Ruby Earrings">
+                    <div class="product-info">
+                        <h3>Ruby Sparkle Earrings</h3>
+                        <p class="price">$2,800</p>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="Bracelet" data-stone="Sapphire" data-price="5100">
+                    <img src="image/bracelets/sapphire-bracelet.jpg" alt="Sapphire Bracelet">
+                    <div class="product-info">
+                        <h3>Sapphire Wave Bracelet</h3>
+                        <p class="price">$5,100</p>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="Ring" data-stone="Ruby" data-price="3800">
+                    <img src="image/rings/ruby-ring.jpg" alt="Ruby Ring">
+                    <div class="product-info">
+                        <h3>Vintage Ruby Ring</h3>
+                        <p class="price">$3,800</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
