@@ -15,7 +15,7 @@
 }
 
 body {
-    color: #555;;
+    color: #555555;
     font-family: 'Great Vibes';
     line-height: 1.6;
     color: var(--text-color);
@@ -490,23 +490,22 @@ footer {
 }
 
 /***************************** Responsive Design ********************************************/
-
-/* Tablet (768px - 1024px) */
+/***************************** TABLET (768px - 1024px) *****************************/
 @media (max-width: 1024px) {
+    /* --- Index Page Categories --- */
     .categories-grid {
-        .categories-grid {
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-areas: 
-                "ring ring necklace"
-                "bracelet earring stone";
-        }
-        
-       
-        .animated-container { padding: 60px 40px; }
-        .container { gap: 40px; }
-        
-        
-        .team-container { grid-template-columns: 1fr; }
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 500px 350px;
+        grid-template-areas: 
+            "ring ring necklace"
+            "bracelet earring stone";
+        gap: 1.2rem;
+        padding: 0 1.5rem;
+    }
+
+    .category-card h3 {
+        font-size: 1.6rem;
+        padding: 1rem 1.8rem;
     }
     
 
@@ -517,10 +516,12 @@ footer {
     
     .container {
         gap: 30px;
+        flex-direction: column;
     }
     
     .column {
         padding: 35px;
+        margin-bottom: 30px; 
     }
     
     .column img {
@@ -540,10 +541,13 @@ footer {
         height: 220px;
     }
 }
+
+/* SMALL TABLET (600px - 768px) */
 @media (max-width: 768px) {
     /* Categories Grid */
     .categories-grid {
         grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
         grid-template-areas: 
             "ring necklace"
             "bracelet earring"
@@ -551,8 +555,7 @@ footer {
     }
     
     /* Our Journey Section */
-    .container { flex-direction: column; }
-    .column { margin-bottom: 30px; }
+    
     
     /* Team Section */
     .team-container { padding: 0 30px; }
