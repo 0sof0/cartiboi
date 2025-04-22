@@ -1,11 +1,10 @@
-<!-- login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Your Carti - Login</title>
+    <title>Your Carti - Sign Up</title>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -22,14 +21,26 @@
         </div>
     </nav>
 
-    <!-- Login Section -->
+    <!-- Signup Section -->
     <section class="login-section">
         <div class="login-container">
             <div class="login-content">
-                <h1>Welcome Back</h1>
-                <p class="login-subtitle">Sign in to your account</p>
+                <h1>Create Account</h1>
+                <p class="login-subtitle">Join our gemstone community</p>
                 
                 <form class="login-form">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" required 
+                               placeholder="Enter your first name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" required
+                               placeholder="Enter your last name">
+                    </div>
+                    
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" required 
@@ -39,22 +50,22 @@
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" required
-                               placeholder="Enter your password">
+                               placeholder="Create a password (min 8 characters)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required
+                               placeholder="Confirm your password">
                     </div>
                     
-                    <div class="form-options">
-                        <label class="remember-me">
-                            <input type="checkbox" name="remember">
-                            Remember me
-                        </label>
-                        <a href="#forgot-password" class="forgot-password">Forgot Password?</a>
-                    </div>
                     
-                    <button type="submit" class="login-button">Sign In</button>
+                    
+                    <button type="submit" class="login-button">Create Account</button>
                     
                     <p class="signup-link">
-                        Don't have an account? 
-                        <a href="signup.html">Create account</a>
+                        Already have an account? 
+                        <a href="login.html">Log in here</a>
                     </p>
                 </form>
             </div>
