@@ -753,32 +753,112 @@ footer {
     margin: -0.5rem 0 1rem;
     opacity: 0.8;
 }
-/* Responsive Design */
-@media (max-width: 768px) {
-    .login-container {
-        padding: 2rem;
-    }
-    
-    .login-content h1 {
-        font-size: 2rem;
-    }
-    
-    .login-subtitle {
-        font-size: 1rem;
-    }
+/*******************************conatct****************************************************/
+.contact-hero {
+    height: 60vh;
+    background: linear-gradient(rgba(63, 18, 47, 0.8), rgba(63, 18, 47, 0.7)),
+                url('../image/background/bg0000.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--light-accent);
 }
 
-@media (max-width: 480px) {
-    .login-container {
-        padding: 1.5rem;
-    }
-    
-    .form-options {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: flex-start;
-    }
+.contact-container {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
 }
+
+.contact-form {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.contact-info {
+    background: var(--bg-color);
+    padding: 3rem;
+    border-radius: 20px;
+    color: var(--light-accent);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--bg-color);
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--light-accent);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--highlight);
+    outline: none;
+    box-shadow: 0 0 8px rgba(168, 123, 123, 0.3);
+}
+
+.contact-info h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--highlight);
+    padding-bottom: 1rem;
+}
+
+.info-item {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.info-item i {
+    font-size: 1.5rem;
+    color: var(--highlight);
+}
+
+.map-container {
+    margin-top: 2rem;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.submit-btn {
+    background: var(--highlight);
+    color: white;
+    padding: 1rem 3rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background: var(--bg-color);
+    transform: translateY(-2px);
+}
+
+
+
+
 
 /***************************** Responsive Design ********************************************/
 /***************************** TABLET (768px - 1024px) *****************************/
@@ -831,6 +911,19 @@ footer {
         width: 220px;
         height: 220px;
     }
+    .contact-container {
+        gap: 2rem;
+        padding: 0 1.5rem;
+    }
+    
+    .contact-form,
+    .contact-info {
+        padding: 2rem;
+    }
+    
+    .contact-info h2 {
+        font-size: 1.8rem;
+    }
 }
 
 /* SMALL TABLET (600px - 768px) */
@@ -850,6 +943,35 @@ footer {
     
     /* Team Section */
     .team-container { padding: 0 30px; }
+
+    .login-container {
+        padding: 2rem;
+    }
+    
+    .login-content h1 {
+        font-size: 2rem;
+    }
+    
+    .login-subtitle {
+        font-size: 1rem;
+    }
+    .contact-container {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+    }
+    
+    .contact-hero {
+        height: 50vh;
+    }
+    
+    .contact-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .map-container iframe {
+        height: 300px;
+    }
+    
 }
 
 /* Phones (under 600px) */
@@ -873,4 +995,37 @@ footer {
     /* Team Section */
     .team-container { padding: 0 15px; }
     .pict { width: 180px; height: 180px; }
+    .login-container {
+        padding: 1.5rem;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    .contact-container {
+        padding: 0 1rem;
+        margin: 2rem auto;
+    }
+    
+    .contact-form,
+    .contact-info {
+        padding: 1.5rem;
+    }
+    
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .submit-btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+    
+    .map-container iframe {
+        height: 250px;
+    }
 }
