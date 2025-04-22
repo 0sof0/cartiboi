@@ -1029,3 +1029,60 @@ footer {
         height: 250px;
     }
 }
+.hamburger {
+    display: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: var(--light-accent);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Animation du hamburger */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: var(--bg-color);
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+        gap: 1.5rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        padding: 15px;
+        font-size: 1.2rem;
+    }
+}

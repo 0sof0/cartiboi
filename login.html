@@ -6,12 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <title>Your Carti - Login</title>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+        });
+    </script>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-content">
             <img src="image/logo/logo.png" alt="Your Carti Logo" class="logo">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <div class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="products.html">Products</a>
