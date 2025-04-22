@@ -581,7 +581,6 @@ footer {
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     transition: transform 0.3s ease;
-    height: 100%; /* Use full grid row height */
     display: flex;
     flex-direction: column;
 }
