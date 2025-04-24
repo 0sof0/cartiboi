@@ -133,8 +133,24 @@
             <p>© 2025 Your Carti | All Rights Reserved</p>
         </div>
     </footer>
-
-    <!-- Font Awesome for Icons -->
-    <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
+<!-- Replace the form action with this script -->
+<script>
+    document.querySelector('.contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const feedbackData = {
+            name: this.name.value,
+            email: this.email.value,
+            subject: this.subject.value,
+            message: this.message.value,
+            date: new Date().toISOString()
+        };
+        
+        let feedback = JSON.parse(localStorage.getItem('feedback')) || [];
+        feedback.push(feedbackData);
+        localStorage.setItem('feedback', JSON.stringify(feedback));
+        alert('Thank you for your message!');
+        this.reset();
+    });
+</script>
 </body>
 </html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Your Carti - Products</title>
     <script defer>
         document.addEventListener('DOMContentLoaded', function() {
@@ -14,6 +15,79 @@
                 navLinks.classList.toggle('active');
                 hamburger.classList.toggle('active');
             });
+
+            // Product Modal Functionality
+            let currentProduct = null;
+
+            window.showProductModal = function(element) {
+                currentProduct = {
+                    name: element.dataset.name,
+                    price: element.dataset.price,
+                    image: element.dataset.image,
+                    category: element.dataset.category,
+                    stone: element.dataset.stone
+                };
+
+                document.getElementById('modalImage').src = currentProduct.image;
+                document.getElementById('modalTitle').textContent = currentProduct.name;
+                document.getElementById('modalPrice').textContent = `$${currentProduct.price}`;
+                document.getElementById('productModal').style.display = 'block';
+            };
+
+            window.closeModal = function() {
+                document.getElementById('productModal').style.display = 'none';
+                currentProduct = null;
+            };
+
+            window.adjustQuantity = function(change) {
+                const input = document.getElementById('quantity');
+                let value = parseInt(input.value) + change;
+                if(value < 1) value = 1;
+                input.value = value;
+            };
+
+            window.addToCart = function() {
+                if(!currentProduct) return;
+                
+                const cartItem = {
+                    ...currentProduct,
+                    quantity: parseInt(document.getElementById('quantity').value)
+                };
+
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart.push(cartItem);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                
+                alert('Added to cart!');
+                closeModal();
+            };
+
+            // Close modal when clicking outside
+            window.onclick = function(event) {
+                if(event.target.classList.contains('product-modal')) {
+                    closeModal();
+                }
+            }
+
+            // Load products from localStorage
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+            const container = document.querySelector('.products-container');
+            
+            container.innerHTML = products.map(product => `
+                <div class="product-card" 
+                     data-name="${product.name}"
+                     data-price="${product.price}"
+                     data-image="${product.image}"
+                     data-category="${product.category}"
+                     data-stone="${product.stone}"
+                     onclick="showProductModal(this)">
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="price">$${product.price}</p>
+                    </div>
+                </div>
+            `).join('');
         });
     </script>
 </head>
@@ -80,51 +154,45 @@
                 <button class="clear-filters">Clear All Filters</button>
             </aside>
 
-            
-            <div class="products-container">
-                
-                <div class="product-card" data-category="Ring" data-stone="Diamond" data-price="4500">
-                    <img src="image/rings/dimond r1.webp" alt="Diamond Ring">
-                    <div class="product-info">
-                        <h3>Royal Diamond Ring</h3>
-                        <p class="price">$4,500</p>
-                    </div>
-                </div>
+            <!-- Products Container -->
+            <div class="products-container"></div>
+        </div>
+    </main>
 
-                <div class="product-card" data-category="Necklace" data-stone="Emerald" data-price="3200">
-                    <img src="image/necklace/emerald n1.jpg" alt="Emerald Necklace">
-                    <div class="product-info">
-                        <h3>Emerald Elegance</h3>
-                        <p class="price">$3,200</p>
+    <!-- Product Modal -->
+    <div class="product-modal" id="productModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div class="product-modal-grid">
+                <img class="modal-image" id="modalImage" src="" alt="Product Image">
+                <div class="modal-details">
+                    <h1 class="modal-title" id="modalTitle"></h1>
+                    <p class="modal-price" id="modalPrice"></p>
+                    <p class="modal-description">Premium quality gemstone jewelry handcrafted by expert artisans. Features genuine stones in premium setting.</p>
+                    
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="adjustQuantity(-1)">-</button>
+                        <input type="number" class="quantity-input" id="quantity" value="1" min="1">
+                        <button class="quantity-btn" onclick="adjustQuantity(1)">+</button>
                     </div>
-                </div>
-
-                <div class="product-card" data-category="Earring" data-stone="Ruby" data-price="2800">
-                    <img src="image/earrings/ruby-earrings.jpg" alt="Ruby Earrings">
-                    <div class="product-info">
-                        <h3>Ruby Sparkle Earrings</h3>
-                        <p class="price">$2,800</p>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="Bracelet" data-stone="Sapphire" data-price="5100">
-                    <img src="image/bracelets/sapphire-bracelet.jpg" alt="Sapphire Bracelet">
-                    <div class="product-info">
-                        <h3>Sapphire Wave Bracelet</h3>
-                        <p class="price">$5,100</p>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="Ring" data-stone="Ruby" data-price="3800">
-                    <img src="image/rings/ruby-ring.jpg" alt="Ruby Ring">
-                    <div class="product-info">
-                        <h3>Vintage Ruby Ring</h3>
-                        <p class="price">$3,800</p>
+                    
+                    <button class="add-to-cart" onclick="addToCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                    
+                    <div class="product-specs">
+                        <h3>Specifications</h3>
+                        <ul id="modalSpecs">
+                            <li>Material: 18K Gold</li>
+                            <li>Stone Size: 1.5ct</li>
+                            <li>Shipping: Free Worldwide</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 
     <script src="js/script.js"></script>
 </body>

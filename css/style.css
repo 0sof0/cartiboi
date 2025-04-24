@@ -1,4 +1,3 @@
-/* style.css */
 :root {
     --bg-color: #3f122f;
     --text-color: hsl(323, 8%, 59%);
@@ -6,8 +5,12 @@
     --highlight: #a87b7b;
     --t30: 4.93vmin;
     --t20: 3.28vmin;
+    --shadow-sm: 0 2px 10px rgba(0,0,0,0.1);
+    --shadow-md: 0 8px 20px rgba(0,0,0,0.12);
+    --transition: all 0.3s ease;
 }
 
+/* Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -15,7 +18,6 @@
 }
 
 body {
-    color: #555555;
     font-family: 'Great Vibes';
     line-height: 1.6;
     color: var(--text-color);
@@ -29,7 +31,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow-sm);
 }
 
 .nav-content {
@@ -40,9 +42,7 @@ body {
     align-items: center;
 }
 
-.logo {
-    height: 60px;
-}
+.logo { height: 60px; }
 
 .nav-links {
     display: flex;
@@ -52,9 +52,8 @@ body {
 .nav-links a {
     color: var(--light-accent);
     text-decoration: none;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
     padding: 0.5rem 1rem;
+    transition: var(--transition);
 }
 
 .nav-links a:hover {
@@ -62,16 +61,11 @@ body {
     transform: translateY(-2px);
 }
 
-/* Hero Section */
+/* Hero Sections */
 .hero {
     height: 85vh;
     background: linear-gradient(rgba(63, 18, 47, 0.7), rgba(63, 18, 47, 0.5)),
                 url('../image/background/bg0000.jpg') center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: var(--light-accent);
     margin-bottom: 3rem;
 }
 
@@ -81,33 +75,33 @@ body {
     text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
 }
 
-/* Categories Grid - Adjusted Heights */
+/* Categories Grid */
 .categories-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 600px 400px; /* Modified row heights */
-    grid-template-areas: 
-        "ring ring ring necklace necklace "
-        "bracelet earring stone stone .";
     gap: 1.8rem;
     width: 95%;
     margin: 3rem 0;
     padding: 0 2rem;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 600px 400px;
+    grid-template-areas: 
+        "ring ring ring necklace necklace"
+        "bracelet earring stone stone .";
 }
-
-.category-card:nth-child(1) { grid-area: necklace; } 
-.category-card:nth-child(2) { grid-area: ring; }    
-.category-card:nth-child(3) { grid-area: bracelet; }
-.category-card:nth-child(4) { grid-area: earring; }
-.category-card:nth-child(5) { grid-area: stone; }
 
 .category-card {
     position: relative;
     overflow: hidden;
     border-radius: 15px;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
 }
+
+.category-card:nth-child(1) { grid-area: necklace; }
+.category-card:nth-child(2) { grid-area: ring; }
+.category-card:nth-child(3) { grid-area: bracelet; }
+.category-card:nth-child(4) { grid-area: earring; }
+.category-card:nth-child(5) { grid-area: stone; }
 
 .category-image {
     width: 100%;
@@ -148,8 +142,6 @@ body {
     scroll-snap-type: x mandatory;
     gap: 2.5rem;
     padding: 0 2rem 2rem;
-    width: 100%;
-    -webkit-overflow-scrolling: touch;
 }
 
 .product-card {
@@ -194,20 +186,6 @@ body {
     margin-left: 1rem;
 }
 
-/* Scrollbar Styling */
-.products-grid::-webkit-scrollbar {
-    height: 6px;
-}
-
-.products-grid::-webkit-scrollbar-thumb {
-    background-color: var(--highlight);
-    border-radius: 3px;
-}
-
-.products-grid::-webkit-scrollbar-track {
-    background: transparent;
-}
-
 /* Footer */
 footer {
     background: var(--bg-color);
@@ -240,7 +218,7 @@ footer {
     border-top: 1px solid rgba(255,255,255,0.1);
 }
 
-/*****************************  about us  ***************************************************/
+/* About Page */
 .about-page-wrapper {
     position: relative;
     padding: 100px 0;
@@ -269,42 +247,6 @@ footer {
     background: linear-gradient(45deg, #3f122f, hsl(323, 8%, 59%), rgb(229, 219, 239));
     background-size: 400% 400%;
     animation: gradientAnimation 23s ease infinite;
-    z-index: -1;
-    opacity: 0.9;
-}
-
-@keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.animated-container h1 {
-    font-size: 4.5rem;
-    color: var(--light-accent);
-    text-align: center;
-    margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-    animation: textGlow 3s ease-in-out infinite;
-}
-
-.animated-container h4 {
-    font-size: 2rem;
-    color: var(--light-accent);
-    text-align: center;
-    margin-bottom: 4rem;
-    letter-spacing: 2px;
-    animation: fadeIn 1.5s ease-out;
-}
-
-@keyframes textGlow {
-    0%, 100% { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
-    50% { text-shadow: 0 0 20px rgba(255,255,255,0.6); }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 .container {
@@ -319,7 +261,7 @@ footer {
 .column {
     flex: 1;
     padding: 50px;
-    border-radius: 25px; 
+    border-radius: 25px;
     backdrop-filter: blur(8px);
     transition: all 0.4s ease;
     box-shadow: 0 15px 35px rgba(0,0,0,0.1);
@@ -360,9 +302,7 @@ footer {
     transition: transform 0.4s ease;
 }
 
-.column:hover img {
-    transform: scale(1.03);
-}
+.column:hover img { transform: scale(1.03); }
 
 .column p {
     color: #555;
@@ -372,6 +312,7 @@ footer {
     padding: 0 20px;
 }
 
+/* Team Section */
 .team {
     padding: 120px 0;
     margin-top: 100px;
@@ -407,12 +348,10 @@ footer {
     padding: 60px;
     border-radius: 30px;
     box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-    transition: all 0.6s ease;
+    transition: var(--transition);
 }
 
-.member:hover {
-    transform: translateY(-15px);
-}
+.member:hover { transform: translateY(-15px); }
 
 .pict {
     width: 280px;
@@ -437,9 +376,7 @@ footer {
     transition: all 0.6s ease;
 }
 
-.member:hover .pict img {
-    transform: scale(1.1);
-}
+.member:hover .pict img { transform: scale(1.1); }
 
 .namet h2 {
     font-size: 2.5rem;
@@ -453,6 +390,7 @@ footer {
     margin-bottom: 30px;
 }
 
+/* CTA Section */
 .cta {
     padding: 150px 0;
     background: linear-gradient(45deg, #3f122f, #5d274f);
@@ -487,8 +425,8 @@ footer {
     background: #fff;
     box-shadow: 0 25px 50px rgba(0,0,0,0.3);
 }
-/******************************product page ************************************************/
-/* Products Page Styles */
+
+/* Products Page */
 .products-wrapper {
     display: grid;
     grid-template-columns: 250px 1fr;
@@ -562,58 +500,18 @@ footer {
     transition: all 0.3s ease;
 }
 
-.clear-filters:hover {
-    background: #5d274f;
-}
+.clear-filters:hover { background: #5d274f; }
 
 .products-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
     padding: 1rem;
-    grid-auto-rows: minmax(300px, auto); /* Set row height limits */
-    align-items: start; /* Align items at the top */
+    grid-auto-rows: minmax(300px, auto);
+    align-items: start;
 }
 
-.product-card {
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.product-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-.product-info {
-    padding: 1rem;
-    text-align: center;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.product-info h3 {
-    color: #3f122f;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-}
-
-.price {
-    color: #a87b7b;
-    font-weight: 600;
-    font-size: 1.1rem;
-}
-/********************************login********************************/
-/* style.css additions */
+/* Login/Signup Forms */
 .login-section {
     min-height: 100vh;
     background: linear-gradient(rgba(63, 18, 47, 0.9), rgba(63, 18, 47, 0.8)),
@@ -647,9 +545,7 @@ footer {
     font-size: 1.1rem;
 }
 
-.login-form .form-group {
-    margin-bottom: 1.5rem;
-}
+.login-form .form-group { margin-bottom: 1.5rem; }
 
 .login-form label {
     display: block;
@@ -693,9 +589,7 @@ footer {
     font-size: 0.9rem;
 }
 
-.forgot-password:hover {
-    text-decoration: underline;
-}
+.forgot-password:hover { text-decoration: underline; }
 
 .login-button {
     width: 100%;
@@ -727,33 +621,9 @@ footer {
     font-weight: 500;
 }
 
-.signup-link a:hover {
-    text-decoration: underline;
-}
-/**********************************signup**************************************************/
-.login-form .name-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-}
+.signup-link a:hover { text-decoration: underline; }
 
-@media (max-width: 480px) {
-    .login-form .name-group {
-        grid-template-columns: 1fr;
-    }
-}
-
-.login-form input[type="password"]::placeholder {
-    font-size: 0.9rem;
-}
-
-.login-form .password-requirements {
-    color: var(--text-color);
-    font-size: 0.9rem;
-    margin: -0.5rem 0 1rem;
-    opacity: 0.8;
-}
-/*******************************conatct****************************************************/
+/* Contact Page */
 .contact-hero {
     height: 60vh;
     background: linear-gradient(rgba(63, 18, 47, 0.8), rgba(63, 18, 47, 0.7)),
@@ -788,9 +658,7 @@ footer {
     color: var(--light-accent);
 }
 
-.form-group {
-    margin-bottom: 1.5rem;
-}
+.form-group { margin-bottom: 1.5rem; }
 
 .form-group label {
     display: block;
@@ -804,8 +672,7 @@ footer {
     padding: 1rem;
     border: 2px solid var(--light-accent);
     border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
+    transition: var(--transition);
 }
 
 .form-control:focus {
@@ -822,10 +689,10 @@ footer {
 }
 
 .info-item {
-    margin-bottom: 2rem;
     display: flex;
     align-items: center;
     gap: 1rem;
+    margin-bottom: 2rem;
 }
 
 .info-item i {
@@ -856,14 +723,201 @@ footer {
     transform: translateY(-2px);
 }
 
+/* Admin Dashboard */
+.admin-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
 
+.management-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
 
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
 
+.data-table th, .data-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
 
-/***************************** Responsive Design ********************************************/
-/***************************** TABLET (768px - 1024px) *****************************/
+.data-table th {
+    background-color: var(--bg-color);
+    color: var(--light-accent);
+}
+
+.action-buttons button {
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.edit-btn {
+    background-color: var(--highlight);
+    color: white;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.product-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    overflow-y: auto;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--highlight);
+}
+
+.product-modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.modal-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.modal-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.modal-title { font-size: 2.5rem; }
+.modal-price {
+    font-size: 2rem;
+    color: var(--highlight);
+    font-weight: 700;
+}
+
+.modal-description {
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.quantity-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--light-accent);
+    background: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.quantity-input {
+    width: 60px;
+    text-align: center;
+    font-size: 1.2rem;
+    border: 2px solid var(--light-accent);
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.add-to-cart {
+    background: var(--highlight);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.add-to-cart:hover {
+    background: var(--bg-color);
+    transform: translateY(-3px);
+}
+
+/* Animations */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes textGlow {
+    0%, 100% { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+    50% { text-shadow: 0 0 20px rgba(255,255,255,0.6); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes modalSlide {
+    from { transform: translateY(-100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive Design */
 @media (max-width: 1024px) {
-    /* --- Index Page Categories --- */
     .categories-grid {
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: 500px 350px;
@@ -878,12 +932,8 @@ footer {
         font-size: 1.6rem;
         padding: 1rem 1.8rem;
     }
-    
 
-    /* --- About Page Journey Section --- */
-    .animated-container {
-        padding: 60px 40px;
-    }
+    .animated-container { padding: 60px 40px; }
     
     .container {
         gap: 30px;
@@ -892,91 +942,66 @@ footer {
     
     .column {
         padding: 35px;
-        margin-bottom: 30px; 
+        margin-bottom: 30px;
     }
     
-    .column img {
-        height: 250px;
-        margin: 25px 0;
-    }
+    .column img { height: 250px; }
 
-    /* --- Team Section --- */
     .team-container {
         grid-template-columns: 1fr;
         gap: 50px;
         padding: 0 60px;
     }
     
-    .pict {
-        width: 220px;
-        height: 220px;
-    }
+    .pict { width: 220px; height: 220px; }
+
     .contact-container {
         gap: 2rem;
         padding: 0 1.5rem;
     }
     
     .contact-form,
-    .contact-info {
-        padding: 2rem;
-    }
+    .contact-info { padding: 2rem; }
     
-    .contact-info h2 {
-        font-size: 1.8rem;
-    }
+    .contact-info h2 { font-size: 1.8rem; }
 }
 
-/* SMALL TABLET (600px - 768px) */
 @media (max-width: 768px) {
-    /* Categories Grid */
     .categories-grid {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: auto;
         grid-template-areas: 
             "ring necklace"
             "bracelet earring"
             "stone .";
     }
-    
-    /* Our Journey Section */
-    
-    
-    /* Team Section */
+
     .team-container { padding: 0 30px; }
 
-    .login-container {
-        padding: 2rem;
-    }
+    .login-container { padding: 2rem; }
     
-    .login-content h1 {
-        font-size: 2rem;
-    }
+    .login-content h1 { font-size: 2rem; }
     
-    .login-subtitle {
-        font-size: 1rem;
-    }
+    .login-subtitle { font-size: 1rem; }
+
     .contact-container {
         grid-template-columns: 1fr;
         max-width: 600px;
     }
     
-    .contact-hero {
-        height: 50vh;
-    }
+    .contact-hero { height: 50vh; }
     
-    .contact-hero h1 {
-        font-size: 2.5rem;
-    }
+    .contact-hero h1 { font-size: 2.5rem; }
     
-    .map-container iframe {
-        height: 300px;
-    }
-    
+    .map-container iframe { height: 300px; }
+
+    .product-modal-grid { grid-template-columns: 1fr; }
+
+    .modal-image { height: 300px; }
+
+    .modal-title { font-size: 2rem; }
 }
 
-/* Phones (under 600px) */
 @media (max-width: 600px) {
-    /* Categories Grid */
     .categories-grid {
         grid-template-columns: 1fr;
         grid-template-areas: 
@@ -986,33 +1011,32 @@ footer {
             "earring"
             "stone";
     }
-    
-    /* Our Journey Section */
+
     .animated-container { padding: 30px 20px; }
-    .column { padding: 20px; }
-    .column img { height: 200px; }
     
-    /* Team Section */
+    .column { padding: 20px; }
+    
+    .column img { height: 200px; }
+
     .team-container { padding: 0 15px; }
+    
     .pict { width: 180px; height: 180px; }
-    .login-container {
-        padding: 1.5rem;
-    }
+    
+    .login-container { padding: 1.5rem; }
     
     .form-options {
         flex-direction: column;
         gap: 1rem;
         align-items: flex-start;
     }
+    
     .contact-container {
         padding: 0 1rem;
         margin: 2rem auto;
     }
     
     .contact-form,
-    .contact-info {
-        padding: 1.5rem;
-    }
+    .contact-info { padding: 1.5rem; }
     
     .info-item {
         flex-direction: column;
@@ -1025,10 +1049,10 @@ footer {
         font-size: 1rem;
     }
     
-    .map-container iframe {
-        height: 250px;
-    }
+    .map-container iframe { height: 250px; }
 }
+
+/* Mobile Navigation */
 .hamburger {
     display: none;
     cursor: pointer;
@@ -1045,23 +1069,18 @@ footer {
     transition: all 0.3s ease;
 }
 
-/* Animation du hamburger */
 .hamburger.active span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
 
-.hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
+.hamburger.active span:nth-child(2) { opacity: 0; }
 
 .hamburger.active span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
 }
 
 @media (max-width: 768px) {
-    .hamburger {
-        display: block;
-    }
+    .hamburger { display: block; }
 
     .nav-links {
         display: none;
@@ -1077,12 +1096,12 @@ footer {
         box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
 
-    .nav-links.active {
-        display: flex;
-    }
+    .nav-links.active { display: flex; }
 
     .nav-links a {
         padding: 15px;
         font-size: 1.2rem;
     }
+
+    .login-form .name-group { grid-template-columns: 1fr; }
 }
