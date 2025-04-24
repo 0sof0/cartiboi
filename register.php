@@ -4,14 +4,8 @@ require 'db_connection.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $plain_password = trim($_POST['password']);
-    $fname = trim($_POST['fname']);
-    $lname = trim($_POST['lname']);
-    $phone = trim($_POST['phone']);
-    $address = trim($_POST['address']);
-    $city = trim($_POST['city']);
-    $state = trim($_POST['state']);
-    $country = trim($_POST['country']);
-    $postal = trim($_POST['postal']);
+    $fname = trim($_POST['firstName']);
+    $lname = trim($_POST['lastName']);
 
     // Initialize error array
     $errors = [];
@@ -29,14 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Password must be at least 6 characters long.";
     }
 
-    if (!preg_match('/^\d{10,15}$/', $phone)) {
-        $errors[] = "Phone number must be numeric and between 10 to 15 digits.";
-    }
-
-    if (empty($address) || empty($city) || empty($state) || empty($country) || empty($postal)) {
-        $errors[] = "Complete address must be provided.";
-    }
-
     // Check if email already exists
     $check_query = "SELECT id FROM clients WHERE email = '$email'";
     $check_result = mysqli_query($conn, $check_query);
@@ -49,13 +35,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hashed_password = password_hash($plain_password, PASSWORD_DEFAULT);
 
         // Prepare SQL query to insert new client data
-        $sql = "INSERT INTO clients (first_name, last_name, email, password_hash, phone, address, city, state, country, postal_code) 
-                VALUES ('$fname', '$lname', '$email', '$hashed_password', '$phone', '$address', '$city', '$state', '$country', '$postal')";
+        $sql = "INSERT INTO clients (first_name, last_name, email, password_hash) 
+                VALUES ('$fname', '$lname', '$email', '$hashed_password')";
 
         // Execute the query
         if (mysqli_query($conn, $sql)) {
             // Redirect to login page on success
-            header("Location: FormLogin.php");
+            header("Location: login.html");
             exit;
         } else {
             $errors[] = "Registration failed: " . mysqli_error($conn);

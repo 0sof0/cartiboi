@@ -7,8 +7,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Check if the user exists
-    $sql = "SELECT * FROM clients WHERE email = '$email'";
-    $result = mysqli_query($conn, $sql);
+    $stmt = $conn->prepare("SELECT * FROM clients WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if (mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result);
@@ -16,16 +18,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Set session variables
             $_SESSION['client_id'] = $user['id'];
             $_SESSION['client_name'] = $user['first_name'];
-
-            // Redirect to dashboard
-            header("Location: dashboard.php");
+            $_SESSION['client_role'] = $user['role'];
+            // Redirect based on role
+            if ($user['role'] === 'admin') {
+                header("Location: admin.php");
+            } else {
+                header("Location: index.html");
+            }
             exit;
         } else {
-            echo "Invalid password.";
+            $_SESSION['message'] = "Invalid password.";
+            $_SESSION['message_type'] = "error";
+            header("Location: loginForm.php"); // Redirect back to login page
+            exit;
         }
     } else {
-        echo "User not found.";
+        $_SESSION['message'] = "User not found.";
+        $_SESSION['message_type'] = "error";
+        header("Location: loginForm.php"); // Redirect back to login page
+        exit;
     }
 }
 ?>
+
 

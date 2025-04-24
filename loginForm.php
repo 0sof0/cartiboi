@@ -1,4 +1,18 @@
-<!-- login.html -->
+<?php
+    session_start(); // Start session
+
+    // Check if there's a session message to display
+    if (isset($_SESSION['message'])) {
+        $message = $_SESSION['message'];
+        $message_type = $_SESSION['message_type'];
+        unset($_SESSION['message']); // Clear the message after showing it
+        unset($_SESSION['message_type']); // Clear the message type
+    } else {
+        $message = '';
+        $message_type = '';
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +29,20 @@
                 navLinks.classList.toggle('active');
                 hamburger.classList.toggle('active');
             });
+            const messageDiv = document.getElementById('messageDiv');
+            const messageText = "<?php echo addslashes($message); ?>";
+            const messageType = "<?php echo addslashes($message_type); ?>";
+
+            if (messageText) {
+                messageDiv.textContent = messageText;
+                messageDiv.classList.add(messageType); // Add the class based on message type (success/error)
+                messageDiv.style.display = 'block'; // Show the message
+                
+                // Hide the message after 2 seconds
+                setTimeout(function() {
+                    messageDiv.style.display = 'none';
+                }, 2000);
+            }
         });
     </script>
 </head>
@@ -33,11 +61,10 @@
                 <a href="products.html">Products</a>
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
-                <a href="login.html">Log in</a>
+                <a href="loginForm.php">Log in</a>
             </div>
         </div>
     </nav>
-
     <!-- Login Section -->
     <section class="login-section">
         <div class="login-container">
@@ -45,7 +72,7 @@
                 <h1>Welcome Back</h1>
                 <p class="login-subtitle">Sign in to your account</p>
                 
-                <form class="login-form">
+                <form class="login-form" action="login.php" method="POST">
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="text" id="email" name="email" required 
@@ -73,23 +100,10 @@
                         <a href="signup.html">Create account</a>
                     </p>
                 </form>
+                <div class="message" id="messageDiv"></div>
             </div>
         </div>
     </section>
 
-    <script>
-        document.querySelector('.login-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        
-        if(email === 'admin' && password === 'admin') {
-            localStorage.setItem('adminLoggedIn', 'true');
-            window.location.href = 'admin.html';
-        } else {
-            alert('Invalid credentials');
-        }
-    });
-    </script>
 </body>
 </html>
