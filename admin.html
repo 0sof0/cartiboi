@@ -75,12 +75,12 @@
             <form id="productForm" onsubmit="handleProductSubmit(event)">
                 <input type="hidden" id="productId">
                 <div class="form-group">
-                    <label>Product Name</label>
-                    <input type="text" id="productName" required>
+                    <label for="productName">Product Name</label>
+                    <input name="productName" type="text" id="productName" required>
                 </div>
                 <div class="form-group">
-                    <label>Category</label>
-                    <select id="productCategory" required>
+                    <label for="productCategory">Category</label>
+                    <select name="productCategory" id="productCategory" required>
                         <option value="Ring">Ring</option>
                         <option value="Necklace">Necklace</option>
                         <option value="Earring">Earring</option>
@@ -88,8 +88,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Stone Type</label>
-                    <select id="productStone" required>
+                    <label for="productStone">Stone Type</label>
+                    <select name="productStone" id="productStone" required>
                         <option value="Diamond">Diamond</option>
                         <option value="Emerald">Emerald</option>
                         <option value="Ruby">Ruby</option>
@@ -97,12 +97,12 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Price</label>
-                    <input type="number" id="productPrice" required>
+                    <label for="productPrice">Price</label>
+                    <input name="productPrice" type="number" id="productPrice" required>
                 </div>
                 <div class="form-group">
-                    <label>Image URL</label>
-                    <input type="text" id="productImage" required>
+                    <label for="productImage">Image URL</label>
+                    <input name="productImage" type="text" id="productImage" required>
                 </div>
                 <button type="submit" class="submit-btn">Save Product</button>
             </form>
