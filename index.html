@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<script defer>
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    });
+</script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Your Carti - Home</title>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <img src="image/logo/logo.png" alt="Your Carti Logo" class="logo">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="login.html">Log in</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Discover Timeless Elegance</h1>
+            <p>Premium Gemstones & Handcrafted Jewelry</p>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <h2>Our Categories</h2>
+        <div class="categories-grid">
+            
+            <div class="category-card">
+                <img src="image/background/bgc2.avif" alt="Necklaces" class="category-image">
+                <h3>Necklaces</h3>
+            </div>
+
+            <div class="category-card">
+                <img src="image/background/bgc.webp" alt="Rings" class="category-image">
+                <h3>Rings</h3>
+            </div>
+            <div class="category-card">
+                <img src="image/background/bgc3.webp" alt="Bracelets" class="category-image">
+                <h3>Bracelets</h3>
+            </div>
+            <div class="category-card">
+                <img src="image/background/bgc4.avif" alt="Earrings" class="category-image">
+                <h3>Earrings</h3>
+            </div>
+            <div class="category-card">
+                <img src="image/background/bgc1.jpg" alt="Gems" class="category-image">
+                <h3>Natural Stones</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discounted Products -->
+    <section class="discounted-products">
+        <h2>Special Offers</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
+                <div class="product-info">
+                    <h3>Opal Dream</h3>
+                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
+                <div class="product-info">
+                    <h3>Opal Dream</h3>
+                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
+                <div class="product-info">
+                    <h3>Opal Dream</h3>
+                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
+                <div class="product-info">
+                    <h3>Opal Dream</h3>
+                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
+                <div class="product-info">
+                    <h3>Opal Dream</h3>
+                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
+                <div class="product-info">
+                    <h3>Opal Dream</h3>
+                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
+                <div class="product-info">
+                    <h3>Opal Dream</h3>
+                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
+                <div class="product-info">
+                    <h3>Opal Dream</h3>
+                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
+                <div class="product-info">
+                    <h3>Opal Dream</h3>
+                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
+                </div>
+            </div>
+            <!-- Add more product cards -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section about">
+                <h2>About Us</h2>
+                <p>We are a leading online retailer of diamonds, offering a wide selection of high-quality gemstones at competitive prices.</p>
+            </div>
+            <div class="footer-section contact">
+                <h2>Contact</h2>
+                <p>+256 99-999-999</p>
+                <p>support@diamonds.com</p>
+            </div>
+            <div class="footer-section location">
+                <h2>Location</h2>
+                <p>123 Diamond St., Ariana</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Your Carti | All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>
