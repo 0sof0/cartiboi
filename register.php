@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Execute the query
         if (mysqli_query($conn, $sql)) {
             // Redirect to login page on success
-            header("Location: login.html");
+            header("Location: loginForm.php");
             exit;
         } else {
             $errors[] = "Registration failed: " . mysqli_error($conn);
