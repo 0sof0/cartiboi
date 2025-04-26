@@ -74,27 +74,7 @@ $result = mysqli_query($conn, $sql);
                 if(event.target.classList.contains('product-modal')) {
                     closeModal();
                 }
-            }
-
-            // Load products from localStorage
-            const products = JSON.parse(localStorage.getItem('products')) || [];
-            const container = document.querySelector('.products-container');
-            
-            container.innerHTML = products.map(product => `
-                <div class="product-card" 
-                     data-name="${product.name}"
-                     data-price="${product.price}"
-                     data-image="${product.image}"
-                     data-category="${product.category}"
-                     data-stone="${product.stone}"
-                     onclick="showProductModal(this)">
-                    <img src="${product.image}" alt="${product.name}">
-                    <div class="product-info">
-                        <h3>${product.name}</h3>
-                        <p class="price">$${product.price}</p>
-                    </div>
-                </div>
-            `).join('');*/
+            }*/
         });
     </script>
 </head>
@@ -109,11 +89,11 @@ $result = mysqli_query($conn, $sql);
                 <span></span>
             </div>
             <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="products.html">Products</a>
+                <a href="index.php">Home</a>
+                <a href="products.php">Products</a>
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
-                <a href="login.html">Log in</a>
+                <a href="loginForm.php">Log in</a>
             </div>
         </div>
     </nav>
@@ -160,27 +140,30 @@ $result = mysqli_query($conn, $sql);
 
                 <button class="clear-filters">Clear All Filters</button>
             </aside>
-
             <!-- Products Container -->
             <div class="products-container">
-                        <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                        <div class="product-card">
-                                <img src="<?php echo htmlspecialchars($row['image_path']); ?>" alt="Product Image">
-                                <h3><?php echo htmlspecialchars($row['name']); ?></h3>
-                                <p><?php echo htmlspecialchars($row['category']) . " | " . htmlspecialchars($row['gem_type']); ?></p>
-                                <p><small><?php echo htmlspecialchars($row['description']); ?></small></p>
-                                <?php if ($row['discount_price']): ?>
-                                    <p><del>$<?php echo $row['price']; ?></del> <strong>$<?php echo $row['discount_price']; ?></strong></p>
-                                <?php else: ?>
-                                    <p><strong>$<?php echo $row['price']; ?></strong></p>
-                                <?php endif; ?>
-                                <form id="addToCartForm" class ="addToCartForm" method="POST">
-                                    <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
-                                    <input type="submit" value="Add to Cart">
-                                </form>
-                        </div>
-                        <?php endwhile; ?>
+                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                <div class="product-card" 
+                    data-category="<?php echo htmlspecialchars($row['category']); ?>"
+                    data-stone="<?php echo htmlspecialchars($row['gem_type']); ?>"
+                    data-price="<?php echo $row['discount_price'] ? $row['discount_price'] : $row['price']; ?>">
+                        <img src="<?php echo htmlspecialchars($row['image_path']); ?>" alt="Product Image">
+                        <h3><?php echo htmlspecialchars($row['name']); ?></h3>
+                        <p><?php echo htmlspecialchars($row['category']) . " | " . htmlspecialchars($row['gem_type']); ?></p>
+                        <p><small><?php echo htmlspecialchars($row['description'] ?? 'No Description'); ?></small></p>
+                        <?php if ($row['discount_price']): ?>
+                            <p><del>$<?php echo $row['price']; ?></del> <strong>$<?php echo $row['discount_price']; ?></strong></p>
+                        <?php else: ?>
+                            <p><strong>$<?php echo $row['price']; ?></strong></p>
+                        <?php endif; ?>
+                        <form id="addToCartForm" class="addToCartForm" method="POST">
+                            <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
+                            <input type="submit" value="Add to Cart">
+                        </form>
+                </div>
+                <?php endwhile; ?>
             </div>
+
 
         </div>
     </main>
