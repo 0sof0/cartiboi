@@ -2,58 +2,84 @@
 <html>
 <head>
     <title>Add Product</title>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const steps = document.querySelectorAll('.form-step');
+    const progressSteps = document.querySelectorAll('.progress-step');
+    let currentStep = 0;
+
+    function showStep(stepIndex) {
+        steps.forEach((step, index) => {
+            step.classList.toggle('active', index === stepIndex);
+        });
+        
+        progressSteps.forEach((step, index) => {
+            step.classList.toggle('active', index <= stepIndex);
+        });
+    }
+
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn-next')) {
+            currentStep++;
+            if (currentStep >= steps.length) {
+                document.querySelector('.form-container').style.display = 'none';
+                document.querySelector('.confirmation-page').classList.add('active');
+            } else {
+                showStep(currentStep);
+            }
+        }
+        
+        if (e.target.classList.contains('btn-prev')) {
+            currentStep = Math.max(0, currentStep - 1);
+            showStep(currentStep);
+        }
+    });
+});
+    </script>
 </head>
 <body>
     <h2>Add New Product</h2>
-    <form action="add_product.php" method="POST">
-        <label for="name">Product Name:</label><br>
-        <input type="text" id="name" name="productNameame" required><br><br>
+    <div class="form-container">
+    <div class="progress-bar">
+        <div class="progress-step active">1</div>
+        <div class="progress-step">2</div>
+        <div class="progress-step">3</div>
+        <div class="progress-step">4</div>
+    </div>
 
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description" required></textarea><br><br>
+    <!-- Step 1 -->
+    <div class="form-step active" data-step="1">
+        <!-- Your form fields for step 1 -->
+        <div class="form-navigation">
+            <button type="button" class="btn-nav btn-next">Next</button>
+        </div>
+    </div>
 
-        <label for="price">Price:</label><br>
-        <input type="number" id="price" name="price" step="0.01" required><br><br>
+    <!-- Step 2 -->
+    <div class="form-step" data-step="2">
+        <!-- Your form fields for step 2 -->
+        <div class="form-navigation">
+            <button type="button" class="btn-nav btn-prev">Previous</button>
+            <button type="button" class="btn-nav btn-next">Next</button>
+        </div>
+    </div>
 
-        <label for="discount_price">Discount Price:</label><br>
-        <input type="number" id="discount_price" name="discount_price" step="0.01"><br><br>
+    <!-- Step 3 -->
+    <div class="form-step" data-step="3">
+        <!-- Your form fields for step 3 -->
+        <div class="form-navigation">
+            <button type="button" class="btn-nav btn-prev">Previous</button>
+            <button type="button" class="btn-nav btn-next">Next</button>
+        </div>
+    </div>
 
-        <label for="category">Category:</label><br>
-        <select id="productCategory" name="productCategory" required>
-            <option value="">--Select Category--</option>
-            <option value="Ring">Ring</option>
-            <option value="Earring">Earring</option>
-            <option value="Necklace">Necklace</option>
-            <option value="Bracelet">Bracelet</option>
-        </select><br><br>
-
-        <label for="productStone">Gem Type:</label><br>
-        <select id="productStone" name="productStone" required>
-            <option value="">--Select GemType--</option>
-            <option value="Diamond">Diamond</option>
-            <option value="Pearl">Pearl</option>
-            <option value="Opal">Opal</option>
-            <option value="Lapis">Lapis</option>
-            <option value="Ruby">Ruby</option>
-            <option value="Emerald">Emerald</option>
-            <option value="Amethyst">Amethyst</option>
-            <option value="Sapphire">Sapphire</option>
-        </select><br><br>
-
-        <label for="size">Size:</label><br>
-        <input type="text" id="size" name="size"><br><br>
-
-        <label for="productImage">Image URL or Path:</label><br>
-        <input type="text" id="productImage" name="productImage"><br><br>
-
-        <label for="availability">Availability:</label><br>
-        <select id="availability" name="availability" required>
-            <option value="in stock">In Stock</option>
-            <option value="out of stock">Out of Stock</option>
-        </select><br><br>
-
-        <input type="submit" value="Add Product">
-    </form>
+    <!-- Confirmation Page -->
+    <div class="confirmation-page">
+        <div class="confirmation-icon">✓</div>
+        <h2 class="confirmation-message">Form Submitted Successfully!</h2>
+        <p>Thank you for your submission.</p>
+    </div>
+</div>
 </body>
 </html>
 

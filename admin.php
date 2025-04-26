@@ -105,177 +105,309 @@
     </div>
     <!-- Product Modal -->
     <div id="productModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Product Form</h2>
-            <form id="productForm" action="add_product.php" method="POST">
-                <input type="hidden" name="productId" id="productId">
-                
-                <div class="form-group">
-                    <label for="productName">Product Name</label>
-                    <input name="productName" type="text" id="productName" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="productCategory">Category</label>
-                    <select name="productCategory" id="productCategory" required>
-                        <option value="Ring">Ring</option>
-                        <option value="Necklace">Necklace</option>
-                        <option value="Earring">Earring</option>
-                        <option value="Bracelet">Bracelet</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="productStone">Stone Type</label>
-                    <select name="productStone" id="productStone" required>
-                        <option value="Diamond">Diamond</option>
-                        <option value="Emerald">Emerald</option>
-                        <option value="Ruby">Ruby</option>
-                        <option value="Sapphire">Sapphire</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="productPrice">Price</label>
-                    <input name="price" type="number" id="productPrice" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="discount_price">Discount Price</label>
-                    <input name="discount_price" type="number" id="discount_price">
-                </div>
-                
-                <div class="form-group">
-                    <label for="productImage">Image URL</label>
-                    <input name="productImage" type="text" id="productImage" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="size">Size</label>
-                    <input name="size" type="text" id="size">
-                </div>
-                
-                <div class="form-group">
-                    <label for="availability">Availability</label>
-                    <select name="availability" id="availability">
-                        <option value="In Stock">In Stock</option>
-                        <option value="Out of Stock">Out of Stock</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea name="description" id="description" rows="4" required></textarea>
-                </div>
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-step active">1</div>
+            <div class="progress-step">2</div>
+            <div class="progress-step">3</div>
+            <div class="progress-step">4</div>
+        </div>
 
-                <button type="submit" class="submit-btn">Save Product</button>
-            </form>
-            <div class="message" id="messageDiv"></div>
+        <!-- Step 1 - Basic Information -->
+        <div class="form-step active" data-step="1">
+            <h2>Product Basics</h2>
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" id="productName" name="productName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="productCategory">Accessory Type</label>
+                <select id="productCategory" name="productCategory" required>
+                    <option value="">Select Type</option>
+                    <option value="Ring">Ring</option>
+                    <option value="Earring">Earring</option>
+                    <option value="Bracelet">Bracelet</option>
+                    <option value="Necklace">Necklace</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="gemType">Jewelry Type</label>
+                <select id="gemType" name="gemType" required>
+                    <option value="">Select Gem</option>
+                    <option value="Diamond">Diamond</option>
+                    <option value="Emerald">Emerald</option>
+                    <option value="Amethyst">Amethyst</option>
+                    <option value="Sapphire">Sapphire</option>
+                    <option value="Ruby">Ruby</option>
+                    <option value="Opal">Opal</option>
+                    <option value="Pearl">Pearl</option>
+                    <option value="Lapis">Lapis</option>
+                </select>
+            </div>
+            
+            <div class="form-navigation">
+                <button type="button" class="btn-nav btn-next">Next</button>
+            </div>
+        </div>
 
+        <!-- Step 2 - Pricing & Availability -->
+        <div class="form-step" data-step="2">
+            <h2>Pricing & Stock</h2>
+            <div class="form-group">
+                <label for="price">Price ($)</label>
+                <input type="number" id="price" name="price" step="0.01" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="discount_price">Discount Price ($)</label>
+                <input type="number" id="discount_price" name="discount_price" step="0.01">
+            </div>
+            
+            <div class="form-group">
+                <label for="availability">Availability</label>
+                <select id="availability" name="availability" required>
+                    <option value="In Stock">In Stock</option>
+                    <option value="Out of Stock">Out of Stock</option>
+                </select>
+            </div>
+            
+            <div class="form-navigation">
+                <button type="button" class="btn-nav btn-prev">Previous</button>
+                <button type="button" class="btn-nav btn-next">Next</button>
+            </div>
+        </div>
+
+        <!-- Step 3 - Details -->
+        <div class="form-step" data-step="3">
+            <h2>Product Details</h2>
+            <div class="form-group">
+                <label for="size">Size</label>
+                <input type="text" id="size" name="size">
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="productImage">Image URL</label>
+                <input type="text" id="productImage" name="productImage" required>
+            </div>
+            
+            <div class="form-navigation">
+                <button type="button" class="btn-nav btn-prev">Previous</button>
+                <button type="button" class="btn-nav btn-next">Next</button>
+            </div>
+        </div>
+
+        <!-- Step 4 - Review -->
+        <div class="form-step" data-step="4">
+            <h2>Review Details</h2>
+            <div id="reviewContent" class="review-content">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+            
+            <div class="form-navigation">
+                <button type="button" class="btn-nav btn-prev">Previous</button>
+                <button type="button" class="btn-nav btn-submit">Submit Product</button>
+            </div>
+        </div>
+
+        <!-- Confirmation -->
+        <div class="confirmation-page">
+            <div class="confirmation-icon">✓</div>
+            <h2 class="confirmation-message">Product Added Successfully!</h2>
+        </div>
+    </div>
+</div>
+</div>
 
         </div>
     </div>
 
     <script>
-        function showProductForm(product = null) {
-            const modal = document.getElementById('productModal');
-            if(product) {
-                document.getElementById('productId').value = product.id;
-                document.getElementById('productName').value = product.name;
-                document.getElementById('productCategory').value = product.category;
-                document.getElementById('productStone').value = product.stone;
-                document.getElementById('productPrice').value = product.price;
-                document.getElementById('productImage').value = product.image;
-            }
-            modal.style.display = 'flex';
+  // Product Modal Management
+let currentStep = 0;
+let formData = {};
+const steps = document.querySelectorAll('.form-step');
+const progressSteps = document.querySelectorAll('.progress-step');
+
+// Show product form modal
+function showProductForm(product = null) {
+    const modal = document.getElementById('productModal');
+    resetFormSteps();
+    
+    if(product) {
+        formData = product;
+        populateFormFields();
+    } else {
+        formData = {};
+    }
+    
+    modal.style.display = 'flex';
+}
+
+// Close modal
+function closeModal() {
+    document.getElementById('productModal').style.display = 'none';
+    resetForm();
+}
+
+// Reset form steps
+function resetFormSteps() {
+    currentStep = 0;
+    steps.forEach(step => step.classList.remove('active'));
+    progressSteps.forEach(step => step.classList.remove('active'));
+    steps[0].classList.add('active');
+    progressSteps[0].classList.add('active');
+}
+
+// Update form steps
+function updateFormSteps() {
+    steps.forEach((step, index) => {
+        step.classList.toggle('active', index === currentStep);
+    });
+    
+    progressSteps.forEach((step, index) => {
+        step.classList.toggle('active', index <= currentStep);
+    });
+}
+
+// Validate current step
+function validateStep(stepIndex) {
+    const currentStepFields = steps[stepIndex].querySelectorAll('[required]');
+    let isValid = true;
+    
+    currentStepFields.forEach(field => {
+        if (!field.checkValidity()) {
+            field.reportValidity();
+            isValid = false;
         }
-        function editProduct(productId) {
-            // Make an AJAX request to fetch product data
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'get_product.php?id=' + productId, true);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    var product = JSON.parse(xhr.responseText);
-                    // Fill the form with product data
-                    document.getElementById('productId').value = product.id;
-                    document.getElementById('productName').value = product.name;
-                    document.getElementById('productCategory').value = product.category;
-                    document.getElementById('productStone').value = product.stone;
-                    document.getElementById('productPrice').value = product.price;
-                    document.getElementById('productImage').value = product.image;
-                    document.getElementById('productModal').style.display = 'flex';
-                }
-            };
-            xhr.send();
-        }
+    });
+    
+    return isValid;
+}
 
-        function deleteProduct(productId) {
-            if (confirm('Are you sure you want to delete this product?')) {
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'delete_product.php', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        alert(xhr.responseText);  // Success message
-                        location.reload(); // Reload the page to reflect the deletion
-                    } else {
-                        alert('Error: ' + xhr.statusText);
-                    }
-                };
-                xhr.send('product_id=' + productId); // Send the product ID to the server
-            }
-        }
+// Collect form data
+function collectFormData() {
+    return {
+        name: document.getElementById('productName').value,
+        category: document.getElementById('productCategory').value,
+        gem_type: document.getElementById('gemType').value,
+        price: parseFloat(document.getElementById('price').value),
+        discount_price: parseFloat(document.getElementById('discount_price').value) || null,
+        availability: document.getElementById('availability').value,
+        size: document.getElementById('size').value,
+        description: document.getElementById('description').value,
+        image_path: document.getElementById('productImage').value
+    };
+}
 
-
-        // Feedback functions
-        function renderFeedback() {
-            const tbody = document.getElementById('feedbackTable');
-            tbody.innerHTML = feedback.map(item => `
-                <tr>
-                    <td>${item.name}</td>
-                    <td>${item.email}</td>
-                    <td>${item.subject}</td>
-                    <td>${item.message}</td>
-                    <td>${new Date(item.date).toLocaleDateString()}</td>
-                </tr>
-            `).join('');
-        }
-
-        function closeModal() {
-            document.getElementById('productModal').style.display = 'none';
-        }
-        // Attach event listener for the form submission
-        document.getElementById('productForm').addEventListener('submit', function(event) {
-            event.preventDefault();  // Prevent normal form submission
-
-            // Create FormData object from the form
-            var formData = new FormData(this);
-
-            // Make the AJAX request
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'add_product.php', true);
-
-            // Handle the response from the server
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    var response = xhr.responseText;
-                    var messageDiv = document.getElementById('messageDiv');
-                    messageDiv.textContent = response; // Display the message
-                    messageDiv.style.display = 'block'; // Show the message
-
-                    // Optional: Clear the form after submission
-                    document.getElementById('productForm').reset();
-                } else {
-                    console.error('Error:', xhr.statusText);
-                }
-            };
-            setTimeout(function() {
-                messageDiv.style.display = 'none'; // Hide the message div after the timeout
-            }, 2000); // 3000ms = 3 seconds
-
-            // Send the form data
-            xhr.send(formData);
+// Submit product
+async function submitProduct() {
+    try {
+        const productData = collectFormData();
+        
+        const response = await fetch('add_product.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(productData)
         });
+        
+        if (!response.ok) throw new Error('Server error');
+        
+        const result = await response.json();
+        if (result.success) {
+            showConfirmation();
+            setTimeout(() => {
+                closeModal();
+                location.reload();
+            }, 2000);
+        } else {
+            throw new Error(result.message || 'Error saving product');
+        }
+    } catch (error) {
+        alert(error.message);
+        console.error('Error:', error);
+    }
+}
+
+// Event listeners
+document.addEventListener('click', (e) => {
+    // Navigation buttons
+    if (e.target.classList.contains('btn-next')) {
+        if (validateStep(currentStep)) {
+            if(currentStep === steps.length - 2) updateReviewContent();
+            currentStep++;
+            updateFormSteps();
+        }
+    }
+    
+    if (e.target.classList.contains('btn-prev')) {
+        currentStep = Math.max(0, currentStep - 1);
+        updateFormSteps();
+    }
+    
+    // Submit button
+    if (e.target.classList.contains('btn-submit')) {
+        submitProduct();
+    }
+    
+    // Close modal
+    if (e.target.classList.contains('close') || e.target === document.getElementById('productModal')) {
+        closeModal();
+    }
+});
+
+// Edit product
+function editProduct(productId) {
+    fetch(`get_product.php?id=${productId}`)
+        .then(response => response.json())
+        .then(product => {
+            showProductForm(product);
+        })
+        .catch(error => {
+            alert('Error loading product: ' + error.message);
+            console.error('Error:', error);
+        });
+}
+
+// Delete product
+function deleteProduct(productId) {
+    if (confirm('Are you sure you want to delete this product?')) {
+        fetch('delete_product.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `product_id=${productId}`
+        })
+        .then(response => {
+            if (response.ok) {
+                location.reload();
+            } else {
+                throw new Error('Delete failed');
+            }
+        })
+        .catch(error => {
+            alert('Error deleting product: ' + error.message);
+            console.error('Error:', error);
+        });
+    }
+}
+
+// ESC key to close modal
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+});
     </script>
 </body>
 </html>
