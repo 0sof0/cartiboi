@@ -3,7 +3,7 @@ session_start();
 require 'db_connection.php';
 
 if (!isset($_SESSION['client_id'])) {
-    header('Location: login.php');
+    header('Location: loginForm.php');
     exit;
 }
 
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['remove_product_id']))
 // Get the user's cart and items
 $cart_result = mysqli_query($conn, "SELECT id FROM cart WHERE client_id = $client_id");
 if (!$cart_row = mysqli_fetch_assoc($cart_result)) {
-    echo "<h2>Your cart is empty.</h2><a href='dashboard.php'>← Go back to shop</a>";
+    echo "<h2>Your cart is empty.</h2><a href='index.php'>← Go back to shop</a>";
     exit;
 }
 
@@ -47,7 +47,7 @@ $result = mysqli_query($conn, $items_query);
 
 <?php if (mysqli_num_rows($result) === 0): ?>
     <p>Your cart is empty.</p>
-    <a href="dashboard.php">← Continue Shopping</a>
+    <a href="index.php">← Continue Shopping</a>
 <?php else: ?>
     <ul>
     <?php while ($row = mysqli_fetch_assoc($result)): ?>
@@ -64,7 +64,7 @@ $result = mysqli_query($conn, $items_query);
         </li>
     <?php endwhile; ?>
     </ul>
-    <a href="dashboard.php">← Continue Shopping</a>
+    <a href="index.php">← Continue Shopping</a>
 <?php endif; ?>
 </body>
 </html>

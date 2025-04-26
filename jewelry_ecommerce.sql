@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 24, 2025 at 08:42 PM
+-- Generation Time: Apr 26, 2025 at 03:05 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -35,14 +35,15 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_client_cart` (`client_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `cart`
 --
 
 INSERT INTO `cart` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
-(1, 2, '2025-04-14 23:16:35', '2025-04-14 23:16:35');
+(1, 2, '2025-04-14 23:16:35', '2025-04-14 23:16:35'),
+(2, 9, '2025-04-26 14:15:49', '2025-04-26 14:15:49');
 
 -- --------------------------------------------------------
 
@@ -60,14 +61,17 @@ CREATE TABLE IF NOT EXISTS `cart_items` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_product_in_cart` (`cart_id`,`product_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `cart_items`
 --
 
 INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `quantity`, `added_at`) VALUES
-(4, 1, 6, 1, '2025-04-21 07:41:45');
+(14, 2, 6, 1, '2025-04-26 15:03:32'),
+(4, 1, 6, 1, '2025-04-21 07:41:45'),
+(16, 2, 12, 1, '2025-04-26 15:03:51'),
+(15, 2, 10, 1, '2025-04-26 15:03:43');
 
 -- --------------------------------------------------------
 
@@ -87,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `role` enum('admin','client') NOT NULL DEFAULT 'client',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `clients`
@@ -100,7 +104,9 @@ INSERT INTO `clients` (`id`, `first_name`, `last_name`, `email`, `password_hash`
 (6, 'xxxxx', 'yyyyyy', 'y@gmail.com', '$2y$10$4K4iOspJPWkXu9aCLdqmLeEwsCmKblCs4wn/7wn9Y5MWjL/UYxeLW', '2025-04-14 23:37:45', '2025-04-14 23:37:45', 'client'),
 (8, 'chaimaa', 'kefi', 'shaimakefi2@gmail.com', '$2y$10$r0kZXnbaTYBi6lE1v9qd6OoWcWvHERdwp58pU95.fzmPL7jCyfiwC', '2025-04-24 14:18:23', '2025-04-24 14:18:23', 'client'),
 (9, 'Admin', 'User', 'admin@example.com', '$2y$10$t2SskZRayGN4fyn7IZknY.mLgZLISXfT9MfSJcsJROyKTK90wEDZO', '2025-04-24 14:36:55', '2025-04-24 14:36:55', 'admin'),
-(10, 'ahmed', 'salhi', 'ahmed@gmail.com', '$2y$10$FHEV26WCEGU7ARpvVPWqmuy0R3Zi80EB4ETS7n3bc6MxRS/hWzrby', '2025-04-24 14:50:53', '2025-04-24 14:50:53', 'client');
+(10, 'ahmed', 'salhi', 'ahmed@gmail.com', '$2y$10$FHEV26WCEGU7ARpvVPWqmuy0R3Zi80EB4ETS7n3bc6MxRS/hWzrby', '2025-04-24 14:50:53', '2025-04-24 14:50:53', 'client'),
+(11, 'chaimaa2', 'kefi', 'shaimakefi@gmail.com', '$2y$10$sR09i8.jqhRuTqWUMr5j5eSdc0x/1UYxNa7a6ESFUFpi1DavcbPB6', '2025-04-25 05:34:47', '2025-04-25 05:34:47', 'client'),
+(12, 'chaimaa2', 'kefi', 'chaimakefi@gmail.com', '$2y$10$kdFfN9UR0mLwOhTHXWPEIukKMiAMCJGONOJIf.jIpceOVQUVN7Y52', '2025-04-25 05:38:05', '2025-04-25 05:38:05', 'client');
 
 -- --------------------------------------------------------
 
@@ -184,26 +190,23 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`id`),
   KEY `idx_products_category` (`category`),
   KEY `idx_products_gem_type` (`gem_type`)
-) ENGINE=MyISAM AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `discount_price`, `category`, `gem_type`, `size`, `image_path`, `availability`, `created_at`, `updated_at`) VALUES
-(31, 'necklaceKL', 'vl^cl^c', 40.00, 20.00, 'Necklace', 'Diamond', '5', 'fpm', 'In Stock', '2025-04-24 17:32:36', '2025-04-24 17:32:36'),
-(6, 'ring', 'eokez', 50.00, 30.00, 'Earring', 'Opal', '54', 'zeaze', 'In Stock', '2025-04-14 23:01:08', '2025-04-14 23:01:08'),
-(10, 'necklaceBR', 'rjofpke)\"o', 50.00, 30.00, 'Necklace', 'Emerald', '5', 'fekfr', 'In Stock', '2025-04-24 15:55:45', '2025-04-24 15:55:45'),
-(11, 'ringGH', 'dsjdslasp', 40.00, 10.00, 'Ring', 'Diamond', '5', 'jlkjdsp', 'In Stock', '2025-04-24 16:04:15', '2025-04-24 16:04:15'),
-(12, 'ringGH', 'dsjdslasp', 40.00, 10.00, 'Ring', 'Diamond', '5', 'jlkjdsp', 'In Stock', '2025-04-24 16:06:23', '2025-04-24 16:06:23'),
-(13, 'earringAR', 'ezgojte', 40.00, 20.00, 'Earring', 'Diamond', '3', 'sfknge', 'In Stock', '2025-04-24 16:08:07', '2025-04-24 16:08:07'),
-(33, 'ringKL', 'sxmw', 50.00, 30.00, 'Ring', 'Diamond', '2', 'wm;', 'In Stock', '2025-04-24 17:46:31', '2025-04-24 17:46:31'),
-(51, 'p89', 'dkml^fl', 50.00, 40.00, 'Ring', 'Diamond', '3', 'cddz', 'In Stock', '2025-04-24 18:42:32', '2025-04-24 18:42:32'),
-(52, 'p756', 'kmkmkô', 50.00, 40.00, 'Ring', 'Diamond', '1', ',lkpp', 'In Stock', '2025-04-24 18:47:03', '2025-04-24 18:47:03'),
-(53, 'p50', 'jopmlk)', 40.00, 30.00, 'Ring', 'Diamond', '3', 'jojoà', 'In Stock', '2025-04-24 18:49:20', '2025-04-24 18:49:20'),
-(54, 'p47', ',,pià', 50.00, 40.00, 'Ring', 'Diamond', '^3', 'm;m;', 'In Stock', '2025-04-24 18:57:34', '2025-04-24 18:57:34'),
-(55, 'p789', 'l,lo', 40.00, 30.00, 'Ring', 'Diamond', '3', 'nknojo', 'In Stock', '2025-04-24 18:58:58', '2025-04-24 18:58:58'),
-(56, 'p789', ',m,pkp', 90.00, 80.00, 'Ring', 'Diamond', '3', 'm,mp', 'In Stock', '2025-04-24 18:59:53', '2025-04-24 18:59:53');
+(6, 'ring', 'eokez', 50.00, 30.00, 'Earring', 'Opal', '54', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-14 23:01:08', '2025-04-26 14:08:15'),
+(10, 'necklaceBR', 'rjofpke)\"o', 50.00, 30.00, 'Necklace', 'Emerald', '5', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-24 15:55:45', '2025-04-26 14:09:42'),
+(11, 'ringGH', 'dsjdslasp', 40.00, 10.00, 'Ring', 'Diamond', '5', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-24 16:04:15', '2025-04-26 14:09:42'),
+(12, 'ringGH', 'dsjdslasp', 40.00, 10.00, 'Ring', 'Diamond', '5', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-24 16:06:23', '2025-04-26 14:09:42'),
+(70, 'null_product', 'effeaz', 50.00, NULL, 'Ring', 'Diamond', '41', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-26 13:55:27', '2025-04-26 14:09:42'),
+(72, '', NULL, 0.00, NULL, 'Ring', 'Diamond', NULL, '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-26 14:07:32', '2025-04-26 14:07:32'),
+(73, 'p3', 'sddq', 20.00, 10.00, 'Earring', 'Diamond', 'x', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-26 14:14:56', '2025-04-26 14:14:56'),
+(74, 'p4', 'nkn', 50.00, 25.00, 'Ring', 'Pearl', NULL, '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-26 14:14:56', '2025-04-26 14:14:56'),
+(75, 'p3', 'sddq', 20.00, 10.00, 'Earring', 'Diamond', 'x', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-26 14:15:00', '2025-04-26 14:15:00'),
+(76, 'p4', 'nkn', 50.00, 25.00, 'Ring', 'Pearl', NULL, '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-26 14:15:00', '2025-04-26 14:15:00');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

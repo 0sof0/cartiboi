@@ -5,7 +5,7 @@ require 'db_connection.php';
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!isset($_SESSION['client_id'])) {
         // User must be logged in
-        header('Location: login.php');
+        header('Location: loginForm.php');
         exit;
     }
 
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         mysqli_query($conn, $insert_query);
     }
 
-    header('Location: dashboard.php');
+    /*header('Location: index.php');*/
     exit;
 }
 ?>

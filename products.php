@@ -1,3 +1,10 @@
+<?php
+require 'db_connection.php';
+session_start();
+
+$sql = "SELECT * FROM products WHERE availability = 'In Stock'";
+$result = mysqli_query($conn, $sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +24,7 @@
             });
 
             // Product Modal Functionality
-            let currentProduct = null;
+            /*let currentProduct = null;
 
             window.showProductModal = function(element) {
                 currentProduct = {
@@ -87,7 +94,7 @@
                         <p class="price">$${product.price}</p>
                     </div>
                 </div>
-            `).join('');
+            `).join('');*/
         });
     </script>
 </head>
@@ -155,7 +162,26 @@
             </aside>
 
             <!-- Products Container -->
-            <div class="products-container"></div>
+            <div class="products-container">
+                        <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                        <div class="product-card">
+                                <img src="<?php echo htmlspecialchars($row['image_path']); ?>" alt="Product Image">
+                                <h3><?php echo htmlspecialchars($row['name']); ?></h3>
+                                <p><?php echo htmlspecialchars($row['category']) . " | " . htmlspecialchars($row['gem_type']); ?></p>
+                                <p><small><?php echo htmlspecialchars($row['description']); ?></small></p>
+                                <?php if ($row['discount_price']): ?>
+                                    <p><del>$<?php echo $row['price']; ?></del> <strong>$<?php echo $row['discount_price']; ?></strong></p>
+                                <?php else: ?>
+                                    <p><strong>$<?php echo $row['price']; ?></strong></p>
+                                <?php endif; ?>
+                                <form id="addToCartForm" class ="addToCartForm" method="POST">
+                                    <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
+                                    <input type="submit" value="Add to Cart">
+                                </form>
+                        </div>
+                        <?php endwhile; ?>
+            </div>
+
         </div>
     </main>
 

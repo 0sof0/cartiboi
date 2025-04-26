@@ -2,7 +2,7 @@
 require 'db_connection.php';
 session_start();
 
-$sql = "SELECT * FROM products WHERE availability = 'In Stock'";
+$sql = "SELECT * FROM products WHERE availability = 'In Stock' AND discount_price IS NOT NULL" ;
 $result = mysqli_query($conn, $sql);
 ?>
 
@@ -11,6 +11,7 @@ $result = mysqli_query($conn, $sql);
 <head>
     <title>Jewelry Dashboard</title>
     <style>
+        /*style for the discounted products from the database*/
         .product {
             border: 1px solid #ccc;
             padding: 10px;

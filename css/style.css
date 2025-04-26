@@ -848,6 +848,22 @@ footer {
     line-height: 1.6;
 }
 /*css for displayed messages after adding a product*/
+.ConfirmDeleteBtn{
+    background-color: lightseagreen; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
+}
+.CancelDeleteBtn{
+    background-color: gray; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
+}
 .message {
     position: fixed;
     top: 50%;

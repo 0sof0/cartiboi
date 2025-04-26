@@ -1,3 +1,10 @@
+<?php
+require 'db_connection.php';
+session_start();
+
+$sql = "SELECT * FROM products WHERE availability = 'In Stock' AND discount_price IS NOT NULL";
+$result = mysqli_query($conn, $sql);
+?>
 <!DOCTYPE html>
 <script defer>
     document.addEventListener('DOMContentLoaded', function() {
@@ -16,6 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <title>Your Carti - Home</title>
+    
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -28,11 +36,12 @@
                 <span></span>
             </div>
             <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="products.html">Products</a>
+                <a href="index.php">Home</a>
+                <a href="products.php">Products</a>
+                <a href="cart.php">🛒 View Cart</a>
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
-                <a href="login.html">Log in</a>
+                <a href="loginForm.php">Log in</a>
                 <a href="logout.php">Log out</a>
             </div>
         </div>
@@ -74,78 +83,30 @@
             </div>
         </div>
     </section>
-
-    <!-- Discounted Products -->
     <section class="discounted-products">
+    <!-- Discounted Products -->
         <h2>Special Offers</h2>
         <div class="products-grid">
+            <?php while ($row = mysqli_fetch_assoc($result)): ?>
             <div class="product-card">
-                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
-                <div class="product-info">
-                    <h3>Opal Dream</h3>
-                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
-                </div>
+                <img src="<?php echo htmlspecialchars($row['image_path']); ?>" alt="Product Image">
+                <h3><?php echo htmlspecialchars($row['name']); ?></h3>
+                <p><?php echo htmlspecialchars($row['category']) . " | " . htmlspecialchars($row['gem_type']); ?></p>
+                <p><small><?php echo htmlspecialchars($row['description']); ?></small></p>
+                <?php if ($row['discount_price']): ?>
+                    <p><del>$<?php echo $row['price']; ?></del> <strong>$<?php echo $row['discount_price']; ?></strong></p>
+                <?php else: ?>
+                    <p><strong>$<?php echo $row['price']; ?></strong></p>
+                <?php endif; ?>
+                <form id="addToCartForm" class ="addToCartForm" method="POST">
+                    <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
+                    <input type="submit" value="Add to Cart">
+                </form>
             </div>
-            <div class="product-card">
-                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
-                <div class="product-info">
-                    <h3>Opal Dream</h3>
-                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
-                <div class="product-info">
-                    <h3>Opal Dream</h3>
-                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
-                <div class="product-info">
-                    <h3>Opal Dream</h3>
-                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
-                <div class="product-info">
-                    <h3>Opal Dream</h3>
-                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
-                <div class="product-info">
-                    <h3>Opal Dream</h3>
-                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
-                <div class="product-info">
-                    <h3>Opal Dream</h3>
-                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
-                <div class="product-info">
-                    <h3>Opal Dream</h3>
-                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="image/rings/opal r1.jpg" alt="Opal Dream Ring" class="product-image">
-                <div class="product-info">
-                    <h3>Opal Dream</h3>
-                    <p class="price">$19,990 <span class="old-price">$29,990</span></p>
-                </div>
-            </div>
-            <!-- Add more product cards -->
+            <?php endwhile; ?>
         </div>
     </section>
-
+    <div class="message" id="messageDiv"></div> <!-- For displaying response from the server -->
     <!-- Footer -->
     <footer>
         <div class="footer-container">
@@ -167,5 +128,40 @@
             <p>© 2025 Your Carti | All Rights Reserved</p>
         </div>
     </footer>
+    <script>
+        document.querySelectorAll('.addToCartForm').forEach(function(form) {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent the default form submission
+
+            var formData = new FormData(this);  // Create FormData object from the form
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'add_to_cart.php', true);  // Open the request
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Handle success - show a message or update the page dynamically
+                    document.getElementById('messageDiv').textContent = 'Product added to cart!';
+                    document.getElementById('messageDiv').style.color = 'green';
+                    document.getElementById('messageDiv').style.display = 'block';
+                } else {
+                    // Handle error
+                    document.getElementById('messageDiv').textContent = 'Error: ' + xhr.statusText;
+                    document.getElementById('messageDiv').style.color = 'red';
+                    document.getElementById('messageDiv').style.display = 'block';
+                }
+            };
+
+            setTimeout(function() {
+                document.getElementById('messageDiv').style.display = 'none'; // Hide the message div after the timeout
+            }, 1000); // 3000ms = 3 seconds
+
+            // Send the form data via AJAX
+            xhr.send(formData);
+        });
+    });
+
+    </script>
+
 </body>
 </html>
