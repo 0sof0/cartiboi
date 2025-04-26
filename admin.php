@@ -73,7 +73,7 @@
                             <td><?php echo htmlspecialchars($row['category']); ?></td>
                             <td><?php echo htmlspecialchars($row['gem_type']); ?></td>
                             <td>$<?php echo htmlspecialchars($row['price']); ?></td>
-                            <td>$<?php echo htmlspecialchars($row['discount_price']); ?></td>
+                            <td>$<?php echo htmlspecialchars($row['discount_price'] ?? 'No discount');?></td>
                             <td class="action-buttons">
                                 <button class="edit-btn" onclick="editProduct(<?php echo $row['id']; ?>)">Edit</button>
                                 <button class="delete-btn" onclick="deleteProduct(<?php echo $row['id']; ?>)">Delete</button>
