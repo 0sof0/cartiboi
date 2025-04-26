@@ -26,7 +26,9 @@ $result = mysqli_query($conn, $sql);
             <a href="logout.php" class="nav-link">🚪 Logout</a>
         </div>
     </nav>
-<!-- test -->
+<!-- test
+test
+test -->
     <main class="products-container">
         <?php while ($row = mysqli_fetch_assoc($result)): ?>
             <div class="product-card">
