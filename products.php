@@ -14,75 +14,91 @@ $result = mysqli_query($conn, $sql);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Your Carti - Products</title>
     <script defer>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-            
-            hamburger.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                hamburger.classList.toggle('active');
-            });
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const modal = document.getElementById('productModal');
+        const overlay = document.createElement('div');
+        
+        overlay.className = 'modal-overlay';
+        document.body.appendChild(overlay);
 
-            // Product Modal Functionality
-            let currentProduct = null;
-
-            window.showProductModal = function(element) {
-                currentProduct = {
-                    name: element.dataset.name,
-                    price: element.dataset.price,
-                    image: element.dataset.image,
-                    category: element.dataset.category,
-                    stone: element.dataset.stone
-                };
-
-                document.getElementById('modalImage').src = currentProduct.image;
-                document.getElementById('modalTitle').textContent = currentProduct.name;
-                document.getElementById('modalPrice').textContent = `$${currentProduct.price}`;
-                document.getElementById('productModal').style.display = 'block';
-            };
-
-            window.closeModal = function() {
-                document.getElementById('productModal').style.display = 'none';
-                currentProduct = null;
-            };
-
-            window.adjustQuantity = function(change) {
-                const input = document.getElementById('quantity');
-                let value = parseInt(input.value) + change;
-                if(value < 1) value = 1;
-                input.value = value;
-            };
-
-            window.addToCart = function() {
-                if(!currentProduct) return;
-                
-                const cartItem = {
-                    ...currentProduct,
-                    quantity: parseInt(document.getElementById('quantity').value)
-                };
-
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                cart.push(cartItem);
-                localStorage.setItem('cart', JSON.stringify(cart));
-                
-                alert('Added to cart!');
-                closeModal();
-            };
-
-            // Close modal when clicking outside
-            window.onclick = function(event) {
-                if(event.target.classList.contains('product-modal')) {
-                    closeModal();
-                }
-            }
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
         });
+
+        let currentProduct = null;
+
+        window.showProductModal = function(element) {
+            currentProduct = {
+                name: element.dataset.name,
+                price: element.dataset.price,
+                image: element.dataset.image,
+                category: element.dataset.category,
+                stone: element.dataset.stone
+            };
+
+            document.getElementById('modalImage').src = currentProduct.image;
+            document.getElementById('modalTitle').textContent = currentProduct.name;
+            document.getElementById('modalPrice').textContent = `$${currentProduct.price}`;
+            document.getElementById('modalCategory').textContent = currentProduct.category;
+            document.getElementById('modalStone').textContent = currentProduct.stone;
+
+            modal.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeModal = function() {
+            modal.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+            currentProduct = null;
+        };
+
+        window.adjustQuantity = function(change) {
+            const input = document.getElementById('quantity');
+            let value = parseInt(input.value) + change;
+            if(value < 1) value = 1;
+            input.value = value;
+        };
+
+        window.addToCart = function() {
+            if(!currentProduct) return;
+            
+            const cartItem = {
+                ...currentProduct,
+                quantity: parseInt(document.getElementById('quantity').value)
+            };
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(cartItem);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            const message = document.createElement('div');
+            message.className = 'message';
+            message.textContent = ' Added to cart!';
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                message.style.display = 'block';
+                setTimeout(() => message.remove(), 2000);
+            }, 10);
+
+            closeModal();
+        };
+
+        overlay.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (e) => e.key === 'Escape' && closeModal());
+        modal.addEventListener('click', (e) => e.stopPropagation());
+    });
     </script>
 </head>
 <body>
-    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-content">
-            <img src="image/logo/logo.png" alt="Your Carti Logo" class="logo">
+            <img src="image/logo/logo.png" alt="Logo" class="logo">
             <div class="hamburger">
                 <span></span>
                 <span></span>
@@ -98,8 +114,6 @@ $result = mysqli_query($conn, $sql);
         </div>
     </nav>
 
-
-    <!-- Products Main Content -->
     <main class="products-page">
         <section class="products-hero">
             <h1>Our Collection</h1>
@@ -107,7 +121,6 @@ $result = mysqli_query($conn, $sql);
         </section>
 
         <div class="products-wrapper">
-            <!-- Filters Sidebar -->
             <aside class="filters-sidebar">
                 <div class="filter-group">
                     <h3>Accessory Type</h3>
@@ -142,68 +155,59 @@ $result = mysqli_query($conn, $sql);
                         <input type="number" id="maxPrice" placeholder="Max" min="0">
                     </div>
                 </div>
-
                 <button class="clear-filters">Clear All Filters</button>
             </aside>
-            <!-- Products Container -->
+
             <div class="products-container">
                 <?php while ($row = mysqli_fetch_assoc($result)): ?>
                 <div class="product-card" 
-                    data-category="<?php echo htmlspecialchars($row['category']); ?>"
-                    data-stone="<?php echo htmlspecialchars($row['gem_type']); ?>"
-                    data-price="<?php echo $row['discount_price'] ? $row['discount_price'] : $row['price']; ?>">
-                        <img src="<?php echo htmlspecialchars($row['image_path']); ?>" alt="Product Image">
-                        <h3><?php echo htmlspecialchars($row['name']); ?></h3>
-                        <p><?php echo htmlspecialchars($row['category']) . " | " . htmlspecialchars($row['gem_type']); ?></p>
-                        <p><small><?php echo htmlspecialchars($row['description'] ?? 'No Description'); ?></small></p>
-                        <?php if ($row['discount_price']): ?>
-                            <p><del>$<?php echo $row['price']; ?></del> <strong>$<?php echo $row['discount_price']; ?></strong></p>
-                        <?php else: ?>
-                            <p><strong>$<?php echo $row['price']; ?></strong></p>
-                        <?php endif; ?>
-                        <form id="addToCartForm" class="addToCartForm" method="POST">
-                            <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
-                            <input type="submit" value="Add to Cart">
-                        </form>
+                    data-category="<?= htmlspecialchars($row['category']) ?>"
+                    data-stone="<?= htmlspecialchars($row['gem_type']) ?>"
+                    data-price="<?= $row['discount_price'] ?: $row['price'] ?>"
+                    data-name="<?= htmlspecialchars($row['name']) ?>"
+                    data-image="<?= htmlspecialchars($row['image_path']) ?>"
+                    onclick="showProductModal(this)">
+                    <img src="<?= htmlspecialchars($row['image_path']) ?>" alt="Product Image">
+                    <h3><?= htmlspecialchars($row['name']) ?></h3>
+                    <p><?= htmlspecialchars($row['category']) ?> | <?= htmlspecialchars($row['gem_type']) ?></p>
+                    <p><small><?= htmlspecialchars($row['description'] ?? 'No Description') ?></small></p>
+                    <?php if ($row['discount_price']): ?>
+                        <p><del>$<?= $row['price'] ?></del> <strong>$<?= $row['discount_price'] ?></strong></p>
+                    <?php else: ?>
+                        <p><strong>$<?= $row['price'] ?></strong></p>
+                    <?php endif; ?>
                 </div>
                 <?php endwhile; ?>
             </div>
-
-
         </div>
     </main>
 
-    <!-- Product Modal -->
+    <div class="modal-overlay"></div>
     <div class="product-modal" id="productModal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeModal()">&times;</span>
-            <div class="product-modal-grid">
-                <img class="modal-image" id="modalImage" src="" alt="Product Image">
-                <div class="modal-details">
-                    <h1 class="modal-title" id="modalTitle"></h1>
-                    <p class="modal-price" id="modalPrice"></p>
-                    <p class="modal-description">Premium quality gemstone jewelry handcrafted by expert artisans. Features genuine stones in premium setting.</p>
-                    
-                    <div class="quantity-selector">
-                        <button class="quantity-btn" onclick="adjustQuantity(-1)">-</button>
-                        <input type="number" class="quantity-input" id="quantity" value="1" min="1">
-                        <button class="quantity-btn" onclick="adjustQuantity(1)">+</button>
-                    </div>
-                    
-                    <button class="add-to-cart" onclick="addToCart()">
-                        <i class="fas fa-shopping-cart"></i>
-                        Add to Cart
-                    </button>
-                    
-                    <div class="product-specs">
-                        <h3>Specifications</h3>
-                        <ul id="modalSpecs">
-                            <li>Material: 18K Gold</li>
-                            <li>Stone Size: 1.5ct</li>
-                            <li>Shipping: Free Worldwide</li>
-                        </ul>
-                    </div>
+            <img class="modal-image" id="modalImage" src="" alt="Product Image">
+            <div class="modal-details">
+                <h1 class="modal-title" id="modalTitle"></h1>
+                <p class="modal-price" id="modalPrice"></p>
+                <div class="product-specs">
+                    <h3>Details</h3>
+                    <ul>
+                        <li>Category: <span id="modalCategory"></span></li>
+                        <li>Stone Type: <span id="modalStone"></span></li>
+                        <li>Material: 18K Gold</li>
+                        <li>Shipping: Free Worldwide</li>
+                    </ul>
                 </div>
+                <div class="quantity-selector">
+                    <button class="quantity-btn" onclick="adjustQuantity(-1)">-</button>
+                    <input type="number" class="quantity-input" id="quantity" value="1" min="1">
+                    <button class="quantity-btn" onclick="adjustQuantity(1)">+</button>
+                </div>
+                <button class="add-to-cart" onclick="addToCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    Add to Cart
+                </button>
             </div>
         </div>
     </div>
