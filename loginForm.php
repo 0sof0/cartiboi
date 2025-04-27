@@ -1,16 +1,16 @@
 <?php
-    session_start(); // Start session
+   session_start(); // Start session
 
-    // Check if there's a session message to display
-    if (isset($_SESSION['message'])) {
-        $message = $_SESSION['message'];
-        $message_type = $_SESSION['message_type'];
-        unset($_SESSION['message']); // Clear the message after showing it
-        unset($_SESSION['message_type']); // Clear the message type
-    } else {
-        $message = '';
-        $message_type = '';
-    }
+   // Initialize default values
+   $message = '';
+   $message_type = '';
+   
+   if (isset($_SESSION['message']) && isset($_SESSION['message_type'])) {
+       $message = $_SESSION['message'];
+       $message_type = $_SESSION['message_type'];
+       unset($_SESSION['message']); // Clear the message after showing it
+       unset($_SESSION['message_type']); // Clear the message type
+   }
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +60,7 @@
                 <a href="index.php">Home</a>
                 <a href="products.php">Products</a>
                 <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
+                <a href="contact.php">Contact</a>
                 <a href="loginForm.php">Log in</a>
             </div>
         </div>

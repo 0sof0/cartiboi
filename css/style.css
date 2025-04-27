@@ -304,6 +304,7 @@
     align-items: center;
     gap: 1rem;
     margin: 1rem 0;
+
     }
     
     .quantity-btn {
@@ -322,8 +323,49 @@
     border-radius: 5px;
     }
     
-    /* Footer */
-    footer {
+
+
+.old-price {
+    color: var(--text-color);
+    opacity: 0.7;
+    text-decoration: line-through;
+    margin-left: 1rem;
+}
+/*css for displayed messages after adding a product*/
+.ConfirmDeleteBtn{
+    background-color: lightseagreen; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
+}
+.CancelDeleteBtn{
+    background-color: gray; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
+}
+.message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    display: none;
+    
+}
+
+
+/* Footer */
+footer {
+>>>>>>> 42ab3b3fa5b2dff6dfe5726df2b6dfffb6146846
     background: var(--bg-color);
     color: var(--light-accent);
     margin-top: 6rem;

@@ -1,3 +1,17 @@
+<?php 
+session_start(); 
+// Check if there's a session message to display
+if (isset($_SESSION['message'])) {
+    $message = $_SESSION['message'];
+    $status = $_SESSION['status'];
+    unset($_SESSION['message']); // Clear the message after showing it
+    unset($_SESSION['status']); // Clear the message type
+} else {
+    $message = '';
+    $status = '';
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +45,7 @@
                 <a href="index.php">Home</a>
                 <a href="products.php">Products</a>
                 <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
+                <a href="contact.php">Contact</a>
                 <a href="loginForm.php">Log in</a>
             </div>
         </div>
@@ -48,7 +62,7 @@
     <!-- Contact Content -->
     <div class="contact-container">
         <!-- Contact Form -->
-        <form class="contact-form" action="https://formspree.io/f/[your-form-id]" method="POST">
+        <form class="contact-form" id="contact-form" action="submit_review.php" method="POST">
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" class="form-control" id="name" name="name" required>
@@ -71,6 +85,7 @@
             
             <button type="submit" class="submit-btn">Send Message</button>
         </form>
+        <div class="message" id="messageDiv"></div>
 
         <!-- Contact Info -->
         <div class="contact-info">
@@ -133,24 +148,40 @@
             <p>© 2025 Your Carti | All Rights Reserved</p>
         </div>
     </footer>
-<!-- Replace the form action with this script -->
-<script>
-    document.querySelector('.contact-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const feedbackData = {
-            name: this.name.value,
-            email: this.email.value,
-            subject: this.subject.value,
-            message: this.message.value,
-            date: new Date().toISOString()
-        };
-        
-        let feedback = JSON.parse(localStorage.getItem('feedback')) || [];
-        feedback.push(feedbackData);
-        localStorage.setItem('feedback', JSON.stringify(feedback));
-        alert('Thank you for your message!');
-        this.reset();
-    });
-</script>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function  handleAddProduct(event) {
+                event.preventDefault();  // Prevent normal form submission
+
+                // Create FormData object from the form
+                var formData = new FormData(this);
+
+                // Make the AJAX request
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'submit_review.php', true);
+
+                // Handle the response from the server
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        var response = xhr.responseText;
+                        var messageDiv = document.getElementById('messageDiv');
+                        messageDiv.textContent = response; // Display the message
+                        messageDiv.style.display = 'block'; // Show the message
+                        messageDiv.style.backgroundColor='green';
+                        messageDiv.style.color='white';
+
+                        // Optional: Clear the form after submission
+                        document.getElementById('contact-form').reset();
+                    } else {
+                        console.error('Error:', xhr.statusText);
+                    }
+                };
+                setTimeout(function() {
+                    messageDiv.style.display = 'none'; // Hide the message div after the timeout
+                }, 2000); // 3000ms = 3 seconds
+
+                // Send the form data
+                xhr.send(formData);
+            });
+    </script>
 </body>
 </html>
