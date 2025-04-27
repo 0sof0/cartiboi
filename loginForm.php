@@ -85,13 +85,14 @@
                                placeholder="Enter your password">
                     </div>
                     
-                    <div class="form-options">
+                    <!-- <div class="form-options">
                         <label class="remember-me">
                             <input type="checkbox" name="remember">
                             Remember me
                         </label>
                         <a href="#forgot-password" class="forgot-password">Forgot Password?</a>
-                    </div>
+                    </div> -->
+                    <br>
                     
                     <button type="submit" class="login-button">Sign In</button>
                     
