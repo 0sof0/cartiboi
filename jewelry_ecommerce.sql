@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 26, 2025 at 03:05 PM
+-- Generation Time: Apr 27, 2025 at 03:22 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `cart_items` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_product_in_cart` (`cart_id`,`product_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `cart_items`
@@ -71,7 +71,9 @@ INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `quantity`, `added_at`)
 (14, 2, 6, 1, '2025-04-26 15:03:32'),
 (4, 1, 6, 1, '2025-04-21 07:41:45'),
 (16, 2, 12, 1, '2025-04-26 15:03:51'),
-(15, 2, 10, 1, '2025-04-26 15:03:43');
+(15, 2, 10, 1, '2025-04-26 15:03:43'),
+(17, 2, 73, 1, '2025-04-27 09:15:18'),
+(18, 2, 74, 1, '2025-04-27 14:26:13');
 
 -- --------------------------------------------------------
 
@@ -190,23 +192,33 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`id`),
   KEY `idx_products_category` (`category`),
   KEY `idx_products_gem_type` (`gem_type`)
-) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `discount_price`, `category`, `gem_type`, `size`, `image_path`, `availability`, `created_at`, `updated_at`) VALUES
-(6, 'ring', 'eokez', 50.00, 30.00, 'Earring', 'Opal', '54', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-14 23:01:08', '2025-04-26 14:08:15'),
-(10, 'necklaceBR', 'rjofpke)\"o', 50.00, 30.00, 'Necklace', 'Emerald', '5', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-24 15:55:45', '2025-04-26 14:09:42'),
-(11, 'ringGH', 'dsjdslasp', 40.00, 10.00, 'Ring', 'Diamond', '5', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-24 16:04:15', '2025-04-26 14:09:42'),
-(12, 'ringGH', 'dsjdslasp', 40.00, 10.00, 'Ring', 'Diamond', '5', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-24 16:06:23', '2025-04-26 14:09:42'),
-(70, 'null_product', 'effeaz', 50.00, NULL, 'Ring', 'Diamond', '41', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-26 13:55:27', '2025-04-26 14:09:42'),
-(72, '', NULL, 0.00, NULL, 'Ring', 'Diamond', NULL, '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-26 14:07:32', '2025-04-26 14:07:32'),
-(73, 'p3', 'sddq', 20.00, 10.00, 'Earring', 'Diamond', 'x', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-26 14:14:56', '2025-04-26 14:14:56'),
-(74, 'p4', 'nkn', 50.00, 25.00, 'Ring', 'Pearl', NULL, '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-26 14:14:56', '2025-04-26 14:14:56'),
 (75, 'p3', 'sddq', 20.00, 10.00, 'Earring', 'Diamond', 'x', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-26 14:15:00', '2025-04-26 14:15:00'),
-(76, 'p4', 'nkn', 50.00, 25.00, 'Ring', 'Pearl', NULL, '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-26 14:15:00', '2025-04-26 14:15:00');
+(80, 'dsDs', 'DZSF', 45.00, 30.00, 'Bracelet', 'Lapis', '4', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-27 09:14:50', '2025-04-27 09:14:50'),
+(81, 'jjsl', 'sqDd', 10.00, NULL, 'Necklace', 'Ruby', '4', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-27 09:14:54', '2025-04-27 09:14:54'),
+(82, 'dsDs', 'DZSF', 45.00, 30.00, 'Bracelet', 'Lapis', '4', '/web/cartiboi/image/bracelet/amethyst%20b1.jpg', 'In Stock', '2025-04-27 09:14:54', '2025-04-27 09:14:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+DROP TABLE IF EXISTS `reviews`;
+CREATE TABLE IF NOT EXISTS `reviews` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `client_email` varchar(100) NOT NULL,
+  `review` text NOT NULL,
+  `review_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `client_email` (`client_email`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

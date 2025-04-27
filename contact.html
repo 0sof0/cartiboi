@@ -48,7 +48,7 @@
     <!-- Contact Content -->
     <div class="contact-container">
         <!-- Contact Form -->
-        <form class="contact-form" action="https://formspree.io/f/[your-form-id]" method="POST">
+        <form class="contact-form" action="submit_review.php" method="POST">
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" class="form-control" id="name" name="name" required>
@@ -133,24 +133,5 @@
             <p>© 2025 Your Carti | All Rights Reserved</p>
         </div>
     </footer>
-<!-- Replace the form action with this script -->
-<script>
-    document.querySelector('.contact-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const feedbackData = {
-            name: this.name.value,
-            email: this.email.value,
-            subject: this.subject.value,
-            message: this.message.value,
-            date: new Date().toISOString()
-        };
-        
-        let feedback = JSON.parse(localStorage.getItem('feedback')) || [];
-        feedback.push(feedbackData);
-        localStorage.setItem('feedback', JSON.stringify(feedback));
-        alert('Thank you for your message!');
-        this.reset();
-    });
-</script>
 </body>
 </html>
