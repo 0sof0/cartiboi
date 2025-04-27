@@ -174,10 +174,9 @@
                     <textarea name="description" id="description" rows="4" required></textarea>
                 </div>
 
-                <button type="submit" class="submit-btn" id="save-btn" value="<?php ?>">Save Product</button>
+                <button type="submit" class="submit-btn">Save Product</button>
             </form>
             <div class="message" id="messageDiv"></div>
-            
 
 
         </div>
@@ -196,84 +195,42 @@
             }
             modal.style.display = 'flex';
         }
-        
         function editProduct(productId) {
-            
+            // Make an AJAX request to fetch product data
             var xhr = new XMLHttpRequest();
             xhr.open('GET', 'get_product.php?id=' + productId, true);
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     var product = JSON.parse(xhr.responseText);
-                    // Populate form with product data
+                    // Fill the form with product data
                     document.getElementById('productId').value = product.id;
                     document.getElementById('productName').value = product.name;
                     document.getElementById('productCategory').value = product.category;
                     document.getElementById('productStone').value = product.stone;
                     document.getElementById('productPrice').value = product.price;
                     document.getElementById('productImage').value = product.image;
-
-                    // Set the operation to "edit"
-                    document.getElementById('operation').value = 'edit';
-
-                    // Show the modal
                     document.getElementById('productModal').style.display = 'flex';
                 }
             };
             xhr.send();
         }
 
-
-
-        
         function deleteProduct(productId) {
-            // Show the confirmation modal
-            var modal = document.getElementById('confirmDeleteModal');
-            var messageDiv = document.getElementById('messageDiv1');
-
-            // Show the confirmation modal
-            modal.style.display = 'block';
-
-            // Handle the "Yes, Delete" button click
-            document.getElementById('confirmDeleteBtn').onclick = function() {
+            if (confirm('Are you sure you want to delete this product?')) {
                 var xhr = new XMLHttpRequest();
                 xhr.open('POST', 'delete_product.php', true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 xhr.onload = function() {
-                    // Hide the confirmation modal
-                    modal.style.display = 'none';
-                    // Remove the product element from the DOM
-                    var productElement = document.getElementById('product-' + productId);
-                    if (productElement) {
-                        productElement.parentNode.removeChild(productElement);
-                    }
-
-                    // Handle success or error
                     if (xhr.status === 200) {
-                        messageDiv.style.display = 'block'; // Show the message div
-                        messageDiv.style.backgroundColor = 'green'; // Success background color
-                        messageDiv.style.color = 'white';
-                        messageDiv.textContent = xhr.responseText;  // Display success message
-                        
+                        alert(xhr.responseText);  // Success message
+                        location.reload(); // Reload the page to reflect the deletion
                     } else {
-                        messageDiv.style.display = 'block'; // Show the message div
-                        messageDiv.style.backgroundColor = 'red'; // Error background color
-                        messageDiv.style.color = 'white';
-                        messageDiv.textContent = 'Error: ' + xhr.statusText; // Display error message
+                        alert('Error: ' + xhr.statusText);
                     }
                 };
-                setTimeout(function() {
-                    messageDiv.style.display = 'none'; // Hide the message div after the timeout
-                }, 2000); // 3000ms = 3 seconds
                 xhr.send('product_id=' + productId); // Send the product ID to the server
-            };
-
-            // Handle the "Cancel" button click
-            document.getElementById('cancelDeleteBtn').onclick = function() {
-                modal.style.display = 'none';  // Hide the confirmation modal
-            };
+            }
         }
-
-
 
 
         // Feedback functions
@@ -293,40 +250,38 @@
         function closeModal() {
             document.getElementById('productModal').style.display = 'none';
         }
-        
         // Attach event listener for the form submission
-        document.getElementById('productForm').addEventListener('submit', function  handleAddProduct(event) {
-                event.preventDefault();  // Prevent normal form submission
+        document.getElementById('productForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent normal form submission
 
-                // Create FormData object from the form
-                var formData = new FormData(this);
+            // Create FormData object from the form
+            var formData = new FormData(this);
 
-                // Make the AJAX request
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'add_product.php', true);
+            // Make the AJAX request
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'add_product.php', true);
 
-                // Handle the response from the server
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        var response = xhr.responseText;
-                        var messageDiv = document.getElementById('messageDiv');
-                        messageDiv.textContent = response; // Display the message
-                        messageDiv.style.display = 'block'; // Show the message
+            // Handle the response from the server
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var response = xhr.responseText;
+                    var messageDiv = document.getElementById('messageDiv');
+                    messageDiv.textContent = response; // Display the message
+                    messageDiv.style.display = 'block'; // Show the message
 
-                        // Optional: Clear the form after submission
-                        document.getElementById('productForm').reset();
-                    } else {
-                        console.error('Error:', xhr.statusText);
-                    }
-                };
-                setTimeout(function() {
-                    messageDiv.style.display = 'none'; // Hide the message div after the timeout
-                }, 2000); // 3000ms = 3 seconds
+                    // Optional: Clear the form after submission
+                    document.getElementById('productForm').reset();
+                } else {
+                    console.error('Error:', xhr.statusText);
+                }
+            };
+            setTimeout(function() {
+                messageDiv.style.display = 'none'; // Hide the message div after the timeout
+            }, 2000); // 3000ms = 3 seconds
 
-                // Send the form data
-                xhr.send(formData);
-            });
-        
+            // Send the form data
+            xhr.send(formData);
+        });
     </script>
 </body>
 </html>

@@ -42,7 +42,10 @@ $result = mysqli_query($conn, $sql);
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
                 <a href="loginForm.php">Log in</a>
+<<<<<<< HEAD:index.php
                 <a href="logout.php">Log out</a>
+=======
+>>>>>>> d9b94525f201674ea48ff66eb38ffee228f385b9:index.html
             </div>
         </div>
     </nav>
