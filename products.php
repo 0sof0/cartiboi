@@ -24,7 +24,7 @@ $result = mysqli_query($conn, $sql);
             });
 
             // Product Modal Functionality
-            /*let currentProduct = null;
+            let currentProduct = null;
 
             window.showProductModal = function(element) {
                 currentProduct = {
@@ -74,7 +74,7 @@ $result = mysqli_query($conn, $sql);
                 if(event.target.classList.contains('product-modal')) {
                     closeModal();
                 }
-            }*/
+            }
         });
     </script>
 </head>
@@ -88,7 +88,7 @@ $result = mysqli_query($conn, $sql);
                 <span></span>
                 <span></span>
             </div>
-            <div class="nav-links">
+           <div class="nav-links">
                 <a href="index.php">Home</a>
                 <a href="products.php">Products</a>
                 <a href="about.html">About</a>
@@ -97,6 +97,7 @@ $result = mysqli_query($conn, $sql);
             </div>
         </div>
     </nav>
+
 
     <!-- Products Main Content -->
     <main class="products-page">

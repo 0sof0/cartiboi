@@ -38,11 +38,9 @@ $result = mysqli_query($conn, $sql);
             <div class="nav-links">
                 <a href="index.php">Home</a>
                 <a href="products.php">Products</a>
-                <a href="cart.php">🛒 View Cart</a>
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
                 <a href="loginForm.php">Log in</a>
-                <a href="logout.php">Log out</a>
             </div>
         </div>
     </nav>
