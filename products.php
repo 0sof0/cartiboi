@@ -88,7 +88,7 @@ $result = mysqli_query($conn, $sql);
                 <span></span>
                 <span></span>
             </div>
-           <div class="nav-links">
+            <div class="nav-links">
                 <a href="index.php">Home</a>
                 <a href="products.php">Products</a>
                 <a href="about.html">About</a>
@@ -127,6 +127,10 @@ $result = mysqli_query($conn, $sql);
                         <label><input type="checkbox" name="stone" value="Diamond"> Diamond</label>
                         <label><input type="checkbox" name="stone" value="Emerald"> Emerald</label>
                         <label><input type="checkbox" name="stone" value="Ruby"> Ruby</label>
+                        <label><input type="checkbox" name="stone" value="Opal"> Opal</label>
+                        <label><input type="checkbox" name="stone" value="Pearl"> Pearl</label>
+                        <label><input type="checkbox" name="stone" value="Lapis"> Lapis</label>
+                        <label><input type="checkbox" name="stone" value="Amathyst"> Amathyst</label>
                         <label><input type="checkbox" name="stone" value="Sapphire"> Sapphire</label>
                     </div>
                 </div>
