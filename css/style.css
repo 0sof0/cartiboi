@@ -249,6 +249,24 @@ footer {
     animation: gradientAnimation 23s ease infinite;
 }
 
+.animated-container h1 {
+    font-size: 3.5rem;
+    color: var(--bg-color);
+    text-align: center;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.animated-container h4 {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
 .container {
     display: flex;
     gap: 60px;
@@ -266,6 +284,7 @@ footer {
     transition: all 0.4s ease;
     box-shadow: 0 15px 35px rgba(0,0,0,0.1);
     border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .column:hover {
@@ -298,7 +317,7 @@ footer {
     height: 280px;
     object-fit: cover;
     border-radius: 12px;
-    margin: 10px;
+    margin: 10px 0;
     transition: transform 0.4s ease;
 }
 
@@ -317,6 +336,7 @@ footer {
     padding: 120px 0;
     margin-top: 100px;
     position: relative;
+    background: var(--bg-color);
 }
 
 .team h1 {
@@ -404,6 +424,7 @@ footer {
     color: var(--light-accent);
     margin-bottom: 50px;
     text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    text-align: center;
 }
 
 .cta-button {
@@ -414,6 +435,7 @@ footer {
     border-radius: 50px;
     font-size: 1.5rem;
     font-weight: 700;
+    text-decoration: none;
     transition: all 0.4s ease;
     letter-spacing: 2px;
     text-transform: uppercase;
