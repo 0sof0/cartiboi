@@ -42,7 +42,7 @@
                 <a href="admin.php">Admin</a>
                 <a href="products.php">Products</a>
                 <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
+                <a href="contact.php">Contact</a>
                 <a href="logout.php" id="logout">Logout</a>
             </div>
         </div>
@@ -131,6 +131,7 @@
                 <button id="confirmReviewDeleteBtn" style="background-color:#3f122f; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Yes, Delete</button>
                 <button id="cancelReviewDeleteBtn" style="background-color: #a87b7b; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Cancel</button>
             </div>
+            <div class="message" id="messageDivReview"></div>
         </section>
     </div>
     <!-- Product Modal -->
@@ -483,7 +484,7 @@ document.addEventListener('click', (e) => {
         function deleteReview(reviewId) {
             // Show the confirmation modal
             var modal = document.getElementById('confirmReviewDeleteModal');
-            var messageDiv = document.getElementById('messageDiv1');
+            var messageDiv = document.getElementById('messageDivReview');
 
             // Show the confirmation modal
             modal.style.display = 'block';

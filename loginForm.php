@@ -60,7 +60,7 @@
                 <a href="index.php">Home</a>
                 <a href="products.php">Products</a>
                 <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
+                <a href="contact.php">Contact</a>
                 <a href="loginForm.php">Log in</a>
             </div>
         </div>
