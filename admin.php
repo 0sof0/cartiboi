@@ -38,11 +38,13 @@
                 <span></span>
             </div>
             <div class="nav-links">
+            <div class="nav-links">
                 <a href="index.php">Home</a>
-                <a href="admin.php">Admin</a>
                 <a href="products.php">Products</a>
                 <a href="about.html">About</a>
                 <a href="contact.php">Contact</a>
+                <a href="loginForm.php">Log in</a>
+            
                 <a href="logout.php" id="logout">Logout</a>
             </div>
         </div>
