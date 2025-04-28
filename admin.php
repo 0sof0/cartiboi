@@ -90,8 +90,8 @@ $result = mysqli_query($conn, $sql);
             
             <div id="confirmDeleteModal" class="message" style="display:none;">
                 <p>Are you sure you want to delete this product?</p>
-                <button id="confirmDeleteBtn">Yes, Delete</button>
-                <button id="cancelDeleteBtn">Cancel</button>
+                <button id="confirmDeleteBtn" class="ConfirmDeleteBtn">Yes, Delete</button>
+                <button id="cancelDeleteBtn" class="CancelDeleteBtn">Cancel</button>
             </div>
         </section>
         <!-- Feedback Management -->
@@ -353,6 +353,58 @@ $result = mysqli_query($conn, $sql);
             // Handle the "Cancel" button click
             document.getElementById('cancelReviewDeleteBtn').onclick = function() {
                 modal.style.display = 'none';
+            };
+        }
+        // Delete product
+    function deleteProduct(productId) {
+            // Show the confirmation modal
+            var modal = document.getElementById('confirmDeleteModal');
+            var messageDiv = document.getElementById('messageDiv1');
+
+            // Show the confirmation modal
+            modal.style.display = 'block';
+
+            // Handle the "Yes, Delete" button click
+            document.getElementById('confirmDeleteBtn').onclick = function() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'delete_product.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onload = function() {
+                    // Hide the confirmation modal
+                    modal.style.display = 'none';
+                    // Remove the product element from the DOM
+                    var productElement = document.getElementById('product-' + productId);
+                    if (productElement) {
+                        productElement.parentNode.removeChild(productElement);
+                    }
+
+                    // Handle success or error
+                    if (xhr.status === 200) {
+                        // Remove the product element from the DOM
+                        var productElement = document.getElementById('product-' + productId);
+                        if (productElement) {
+                            productElement.parentNode.removeChild(productElement);
+                        }
+                        messageDiv.style.display = 'block'; // Show the message div
+                        messageDiv.style.backgroundColor = 'green'; // Success background color
+                        messageDiv.style.color = 'white';
+                        messageDiv.textContent = xhr.responseText;  // Display success message
+                        
+                    } else {
+                        messageDiv.style.display = 'block'; // Show the message div
+                        messageDiv.style.backgroundColor = 'red'; // Error background color
+                        messageDiv.style.color = 'white';
+                        messageDiv.textContent = 'Error: ' + xhr.statusText; // Display error message
+                    }
+                };
+                setTimeout(function() {
+                    messageDiv.style.display = 'none'; // Hide the message div after the timeout
+                }, 2000); // 3000ms = 3 seconds
+                xhr.send('product_id=' + productId); // Send the product ID to the server
+            };
+            // Handle the "Cancel" button click
+            document.getElementById('cancelDeleteBtn').onclick = function() {
+                modal.style.display = 'none';  // Hide the confirmation modal
             };
         }
         
