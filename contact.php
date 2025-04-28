@@ -1,3 +1,4 @@
+<!-- /*test*/ -->
 <?php 
 session_start(); 
 // Check if there's a session message to display
