@@ -1,7 +1,7 @@
 <?php
 require 'db_connection.php';
 session_start();
-
+/*test*/
 $sql = "SELECT * FROM products WHERE availability = 'In Stock' AND discount_price IS NOT NULL";
 $result = mysqli_query($conn, $sql);
 ?>
