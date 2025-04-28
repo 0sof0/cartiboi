@@ -80,7 +80,7 @@
     
     /* Hero Sections */
     .hero{
-    height: 85vh;
+    height: 90vh;
     background: linear-gradient(rgba(63, 18, 47, 0.7), rgba(63, 18, 47, 0.5)),
     url('../image/background/bg0000.jpg') center/cover no-repeat;
     margin: -1rem 0 3rem;
@@ -103,15 +103,11 @@
     animation: titleReveal 0.8s ease-out 0.3s forwards;
     }
     
-    /* .hero-content p, .products-hero p {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    animation: subtitleReveal 0.8s ease-out 0.6s forwards;
-    } */
+ 
 
     .products-hero {
         position: relative;
-        height: 90vh;
+        height: 95vh;
         background: linear-gradient(rgba(63, 18, 47, 0.884), rgba(63, 18, 47, 0.432)),
                     url('../image/background/Screenshot 2025-04-28 000822.png') center/cover no-repeat;
         display: flex;
@@ -805,7 +801,7 @@
     }
     
     /* Contact Page */
-    /* Contact Page */
+ 
     .contact-hero {
         height: 60vh;
         background: linear-gradient(rgba(63, 18, 47, 0.8), rgba(63, 18, 47, 0.7)),
