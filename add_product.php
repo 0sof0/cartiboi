@@ -1,32 +1,30 @@
 <?php
-session_start(); // Start session
-require 'db_connection.php'; // Include the database connection
+session_start();
+require 'db_connection.php';
 
-$message = ''; // Initialize the message variable
-$status = "error"; // Default status
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get form data
-    $name = $_POST['productName'];
-    $description = $_POST['description'];
-    $price = $_POST['price'];
-    $category = $_POST['productCategory'];
-    $image_url = $_POST['productImage']; // Can be a URL or path
-    $discount_price = $_POST['discount_price'];
-    $size = $_POST['size'];
-    $availability = $_POST['availability'];
-    $gem_type = $_POST['productStone'];
+    $name = mysqli_real_escape_string($conn, $_POST['productName']);
+    $category = mysqli_real_escape_string($conn, $_POST['productCategory']);
+    $gem_type = mysqli_real_escape_string($conn, $_POST['gemType']);
+    $price = mysqli_real_escape_string($conn, $_POST['price']);
+    $discount_price = mysqli_real_escape_string($conn, $_POST['discount_price']);
+    $description = mysqli_real_escape_string($conn, $_POST['description']);
+    $image_url = mysqli_real_escape_string($conn, $_POST['productImage']);
 
-    // Prepare the SQL statement to insert product
-    $sql = "INSERT INTO products (name, description, price, discount_price, category, gem_type, size, image_path, availability) 
-            VALUES ('$name', '$description', '$price', '$discount_price', '$category', '$gem_type', '$size', '$image_url', '$availability')";
-    
-    // Execute the query and handle response
-    if (mysqli_query($conn, $sql)) {
-        echo "Product added successfully!";
+    $stmt = $conn->prepare("INSERT INTO products (name, category, gem_type, price, discount_price, description, image_path) 
+                           VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssdsss", $name, $category, $gem_type, $price, $discount_price, $description, $image_url);
+
+    if ($stmt->execute()) {
+        $_SESSION['message'] = "Product added successfully!";
+        $_SESSION['status'] = "success";
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        $_SESSION['message'] = "Error: " . $stmt->error;
+        $_SESSION['status'] = "error";
     }
+
+    $stmt->close();
+    header("Location: admin.php");
+    exit();
 }
-
 ?>
-

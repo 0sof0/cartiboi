@@ -159,26 +159,34 @@ $result = mysqli_query($conn, $sql);
             </aside>
 
             <div class="products-container">
-                <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                <div class="product-card" 
-                    data-category="<?= htmlspecialchars($row['category']) ?>"
-                    data-stone="<?= htmlspecialchars($row['gem_type']) ?>"
-                    data-price="<?= $row['discount_price'] ?: $row['price'] ?>"
-                    data-name="<?= htmlspecialchars($row['name']) ?>"
-                    data-image="<?= htmlspecialchars($row['image_path']) ?>"
-                    onclick="showProductModal(this)">
-                    <img src="<?= htmlspecialchars($row['image_path']) ?>" alt="Product Image">
-                    <h3><?= htmlspecialchars($row['name']) ?></h3>
-                    <p><?= htmlspecialchars($row['category']) ?> | <?= htmlspecialchars($row['gem_type']) ?></p>
-                    <p><small><?= htmlspecialchars($row['description'] ?? 'No Description') ?></small></p>
-                    <?php if ($row['discount_price']): ?>
-                        <p><del>$<?= $row['price'] ?></del> <strong>$<?= $row['discount_price'] ?></strong></p>
-                    <?php else: ?>
-                        <p><strong>$<?= $row['price'] ?></strong></p>
-                    <?php endif; ?>
+    <?php while ($row = mysqli_fetch_assoc($result)): ?>
+    <div class="product-card" 
+        data-category="<?= htmlspecialchars($row['category']) ?>"
+        data-stone="<?= htmlspecialchars($row['gem_type']) ?>"
+        data-price="<?= $row['discount_price'] ?: $row['price'] ?>"
+        data-name="<?= htmlspecialchars($row['name']) ?>"
+        data-image="<?= htmlspecialchars($row['image_path']) ?>"
+        onclick="showProductModal(this)">
+        <div class="product-image-wrapper">
+            <img src="<?= htmlspecialchars($row['image_path']) ?>" alt="Product Image">
+        </div>
+        <div class="product-details">
+            <h3><?= htmlspecialchars($row['name']) ?></h3>
+            <p class="product-category"><?= htmlspecialchars($row['category']) ?> | <?= htmlspecialchars($row['gem_type']) ?></p>
+            <?php if ($row['discount_price']): ?>
+                <div class="price-container">
+                    <del>$<?= $row['price'] ?></del> 
+                    <strong>$<?= $row['discount_price'] ?></strong>
                 </div>
-                <?php endwhile; ?>
-            </div>
+            <?php else: ?>
+                <div class="price-container">
+                    <strong>$<?= $row['price'] ?></strong>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+    <?php endwhile; ?>
+</div>
         </div>
     </main>
 

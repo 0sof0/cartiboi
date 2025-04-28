@@ -82,28 +82,36 @@ $result = mysqli_query($conn, $sql);
         </div>
     </section>
     <section class="discounted-products">
-    <!-- Discounted Products -->
-        <h2>Special Offers</h2>
-        <div class="products-grid">
-            <?php while ($row = mysqli_fetch_assoc($result)): ?>
-            <div class="product-card">
-                <img src="<?php echo htmlspecialchars($row['image_path']); ?>" alt="Product Image">
-                <h3><?php echo htmlspecialchars($row['name']); ?></h3>
-                <p><?php echo htmlspecialchars($row['category']) . " | " . htmlspecialchars($row['gem_type']); ?></p>
-                <p><small><?php echo htmlspecialchars($row['description']); ?></small></p>
+    <h2>Special Offers</h2>
+    <div class="products-container"> <!-- Changed from products-grid -->
+        <?php while ($row = mysqli_fetch_assoc($result)): ?>
+        <div class="product-card">
+            <div class="product-image-wrapper">
+                <img src="<?= htmlspecialchars($row['image_path']) ?>" alt="Product Image">
+            </div>
+            <div class="product-details">
+                <h3><?= htmlspecialchars($row['name']) ?></h3>
+                <p class="product-category"><?= htmlspecialchars($row['category']) ?> | <?= htmlspecialchars($row['gem_type']) ?></p>
+                <p><small><?= htmlspecialchars($row['description']) ?></small></p>
                 <?php if ($row['discount_price']): ?>
-                    <p><del>$<?php echo $row['price']; ?></del> <strong>$<?php echo $row['discount_price']; ?></strong></p>
+                    <div class="price-container">
+                        <del>$<?= $row['price'] ?></del> 
+                        <strong>$<?= $row['discount_price'] ?></strong>
+                    </div>
                 <?php else: ?>
-                    <p><strong>$<?php echo $row['price']; ?></strong></p>
+                    <div class="price-container">
+                        <strong>$<?= $row['price'] ?></strong>
+                    </div>
                 <?php endif; ?>
-                <form id="addToCartForm" class ="addToCartForm" method="POST">
-                    <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
+                <form class="addToCartForm" method="POST">
+                    <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
                     <input type="submit" value="Add to Cart">
                 </form>
             </div>
-            <?php endwhile; ?>
         </div>
-    </section>
+        <?php endwhile; ?>
+    </div>
+</section>
     <div class="message" id="messageDiv"></div> <!-- For displaying response from the server -->
     <!-- Footer -->
     <footer>
