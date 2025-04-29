@@ -987,6 +987,36 @@
     color: white;
     display: none;
 }
+    /*css for displayed messages after adding a product*/
+    .ConfirmDeleteBtn{
+        background-color:#721c24;; 
+        color: white; 
+        padding: 10px 20px; 
+        border: none; 
+        border-radius: 5px; 
+        cursor: pointer;
+    }
+    .CancelDeleteBtn{
+        background-color: rgb(216, 108, 138); 
+        color: white; 
+        padding: 10px 20px; 
+        border: none; 
+        border-radius: 5px; 
+        cursor: pointer;
+    }
+    .message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 15px;
+        border: 1px solid #f5c6cb;
+        border-radius: 5px;
+        display: none;
+        
+    }
     
     /* Responsive Design */
     @media (max-width: 1024px) {
@@ -1135,5 +1165,4 @@
     to {
     transform: translateY(0);
     opacity: 1;
-    }
-    }
+    }}
