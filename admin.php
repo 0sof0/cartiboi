@@ -93,6 +93,7 @@ $result = mysqli_query($conn, $sql);
                 <button id="confirmDeleteBtn" class="ConfirmDeleteBtn">Yes, Delete</button>
                 <button id="cancelDeleteBtn" class="CancelDeleteBtn">Cancel</button>
             </div>
+            <div class="message" id="messageDiv1"></div>
         </section>
         <!-- Feedback Management -->
         <section class="management-section">
